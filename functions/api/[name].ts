@@ -1,13 +1,5 @@
 import { EventContext } from "@cloudflare/workers-types";
-
-// function to create a hash array from a given input string
-async function createHashArray(input: string) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray;
-}
+import { ATTRIBUTES, createHashArray } from "../../src/store/common";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -24,16 +16,32 @@ export async function onRequest(
     }
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
-
-    // return the path parameter as a string
+    // determine layer selections
+    const selectedLayers = selectLayers(hashArray);
+    // return details
     return new Response(
       JSON.stringify({
         name,
         hashArray,
+        selectedLayers,
       })
     );
   } catch (err) {
     // return error as string
     return new Response(String(err), { status: 404 });
   }
+}
+
+function selectLayers(hashArray: number[]) {
+  const selectedLayers: { [key: string]: string | undefined } = {};
+  let hashIndex = 0;
+
+  for (const [key, value] of Object.entries(ATTRIBUTES)) {
+    const index = hashArray[hashIndex % hashArray.length] % value.length;
+    const chosenHash = value[index];
+    selectedLayers[key] = chosenHash;
+    hashIndex++;
+  }
+
+  return selectedLayers;
 }
