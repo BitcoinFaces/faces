@@ -1,5 +1,14 @@
 import { EventContext } from "@cloudflare/workers-types";
 
+// function to create a hash array from a given input string
+async function createHashArray(input: string) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray;
+}
+
 export async function onRequest(
   context: EventContext<any, any, any>
 ): Promise<Response> {
@@ -13,8 +22,16 @@ export async function onRequest(
     if (!/^[^\s.]*\.?[^\s.]*$/.test(name)) {
       return new Response("Invalid input per SNS spec", { status: 400 });
     }
+    // create a hash array from the input string
+    const hashArray = await createHashArray(name);
+
     // return the path parameter as a string
-    return new Response(name);
+    return new Response(
+      JSON.stringify({
+        name,
+        hashArray,
+      })
+    );
   } catch (err) {
     // return error as string
     return new Response(String(err), { status: 404 });
