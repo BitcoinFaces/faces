@@ -5,7 +5,7 @@ function Content() {
   return (
     <SimpleGrid width="100%" maxW="1200px">
       <Stack alignItems="center">
-        <BitcoinFaceLogo width="250" height="250" />
+        <BitcoinFaceLogo width="300" height="300" />
         <Text fontSize="2xl">Putting names to faces.</Text>
       </Stack>
     </SimpleGrid>
