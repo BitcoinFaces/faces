@@ -21,7 +21,7 @@ export async function onRequest(
     // create svg from layers
     const svgLayers = Object.entries(selectedLayers)
       .map(([key, hash]) => {
-        return `<image id="${key}" xlink:href="https://inscribe.news/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
+        return `<image id="${key}" xlink:href="https://inscribe.news/api/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
       })
       .join("\n");
 
