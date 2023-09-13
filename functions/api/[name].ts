@@ -18,16 +18,33 @@ export async function onRequest(
     const hashArray = await createHashArray(name);
     // determine layer selections
     const selectedLayers = selectLayers(hashArray);
-    // return details
+    // create svg from layers
+    const svgLayers = Object.entries(selectedLayers)
+      .map(([key, hash]) => {
+        return `<image id="${key}" xlink:href="https://inscribe.news/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
+      })
+      .join("\n");
+
+    const svg = `<svg id="BitcoinFace" width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
+
+    // check for query parameter
+    if (context.request.url.includes("format=image")) {
+      return new Response(svg, {
+        headers: { "Content-Type": "image/svg+xml" },
+      });
+    }
+
+    // return details as JSON
     return new Response(
       JSON.stringify(
         {
           name,
           hashArray,
           selectedLayers,
+          svg,
         },
         null,
-        2
+        1
       )
     );
   } catch (err) {
