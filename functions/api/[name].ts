@@ -20,11 +20,15 @@ export async function onRequest(
     const selectedLayers = selectLayers(hashArray);
     // return details
     return new Response(
-      JSON.stringify({
-        name,
-        hashArray,
-        selectedLayers,
-      })
+      JSON.stringify(
+        {
+          name,
+          hashArray,
+          selectedLayers,
+        },
+        null,
+        2
+      )
     );
   } catch (err) {
     // return error as string
