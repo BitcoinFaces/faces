@@ -5,7 +5,7 @@ export async function onRequest(
 ): Promise<Response> {
   try {
     // Get path parameter
-    const name = String(context.params.name);
+    const name = decodeURIComponent(String(context.params.name));
     // Return the path parameter as a string
     return new Response(name);
   } catch (err) {
