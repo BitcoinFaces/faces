@@ -1,6 +1,6 @@
 import { EventContext } from "@cloudflare/workers-types";
-import { createHashArray } from "../../src/store/common";
-import { selectLayers } from "../../src/store/faces";
+import { createHashArray } from "../../../src/store/common";
+import { selectLayers } from "../../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>

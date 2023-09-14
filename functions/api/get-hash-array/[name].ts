@@ -1,5 +1,5 @@
 import { EventContext } from "@cloudflare/workers-types";
-import { createHashArray } from "../../src/store/common";
+import { createHashArray } from "../../../src/store/common";
 
 export async function onRequest(
   context: EventContext<any, any, any>
