@@ -235,13 +235,13 @@ export function selectLayers(hashArray: number[], inscribed = true) {
 
 export function createLayers(layers: LayerSelection, useCache = false) {
   return Object.entries(layers)
-    .map(([key, hash]) => {
+    .map(([key, value]) => {
       if (useCache) {
         // return the matching layer in the cache
-        return `work in progress`;
+        return value;
       }
-      // return a link to the on-chain image
-      return `<image id="${key}" xlink:href="/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
+      // return a link to the on-chain image hash
+      return `<image id="${key}" xlink:href="/content/${value}" x="0" y="0" width="500" height="500"></image>`;
     })
     .join("\n");
 }
