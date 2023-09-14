@@ -12,7 +12,9 @@ export async function onRequest(
   try {
     const { searchParams } = new URL(context.request.url);
     const name = searchParams.get("name")?.toLowerCase();
-    const cache = searchParams.get("cache") === "true";
+    const onchain = searchParams.get("onchain") === "true";
+    const host = searchParams.get("host");
+    const hostName = host ? host : "https://inscribe.news/api/content";
     // validate name is provided
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
@@ -24,9 +26,9 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const selectedLayers = selectLayers(hashArray, cache);
+    const selectedLayers = selectLayers(hashArray, onchain);
     // create svg layers from selected layers
-    const svgLayers = createLayers(selectedLayers, cache);
+    const svgLayers = createLayers(selectedLayers, onchain, hostName);
     // create svg file from svg layers
     const svgFile = createSvgFile(svgLayers);
     // return svg code as string

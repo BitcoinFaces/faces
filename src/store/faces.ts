@@ -219,29 +219,33 @@ export type LayerSelection = {
 // HELPER FUNCTIONS
 /////////////////////////
 
-export function selectLayers(hashArray: number[], cache = false) {
+export function selectLayers(hashArray: number[], onchain = false) {
   const selectedLayers: LayerSelection = {};
   let hashIndex = 0;
   for (const [key, value] of Object.entries(
-    cache ? LOCAL_ATTRIBUTES : INSCRIBED_ATTRIBUTES
+    onchain ? INSCRIBED_ATTRIBUTES : LOCAL_ATTRIBUTES
   )) {
     const index = hashArray[hashIndex % hashArray.length] % value.length;
-    const chosenHash = value[index];
-    selectedLayers[key] = chosenHash;
+    const chosenValue = value[index];
+    selectedLayers[key] = chosenValue;
     hashIndex++;
   }
   return selectedLayers;
 }
 
-export function createLayers(layers: LayerSelection, cache = false) {
+export function createLayers(
+  layers: LayerSelection,
+  onchain = false,
+  host = "/content"
+) {
   return Object.entries(layers)
     .map(([key, value]) => {
-      if (cache) {
-        // return the matching layer in the cache
-        return value;
+      if (onchain) {
+        // return a link to the on-chain image hash
+        return `<image id="${key}" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
       }
-      // return a link to the on-chain image hash
-      return `<image id="${key}" xlink:href="/content/${value}" x="0" y="0" width="500" height="500"></image>`;
+      // return the matching layer in the cache
+      return value;
     })
     .join("\n");
 }
