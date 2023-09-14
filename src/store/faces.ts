@@ -219,11 +219,11 @@ export type LayerSelection = {
 // HELPER FUNCTIONS
 /////////////////////////
 
-export function selectLayers(hashArray: number[], inscribed = true) {
+export function selectLayers(hashArray: number[], cache = false) {
   const selectedLayers: LayerSelection = {};
   let hashIndex = 0;
   for (const [key, value] of Object.entries(
-    inscribed ? INSCRIBED_ATTRIBUTES : LOCAL_ATTRIBUTES
+    cache ? LOCAL_ATTRIBUTES : INSCRIBED_ATTRIBUTES
   )) {
     const index = hashArray[hashIndex % hashArray.length] % value.length;
     const chosenHash = value[index];
@@ -233,10 +233,10 @@ export function selectLayers(hashArray: number[], inscribed = true) {
   return selectedLayers;
 }
 
-export function createLayers(layers: LayerSelection, useCache = false) {
+export function createLayers(layers: LayerSelection, cache = false) {
   return Object.entries(layers)
     .map(([key, value]) => {
-      if (useCache) {
+      if (cache) {
         // return the matching layer in the cache
         return value;
       }

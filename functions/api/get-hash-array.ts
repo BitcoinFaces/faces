@@ -1,26 +1,24 @@
 import { EventContext } from "@cloudflare/workers-types";
-import { createHashArray, validateName } from "../../../src/store/common";
-import { selectLayers } from "../../../src/store/faces";
+import { createHashArray, validateName } from "../../src/store/common";
 
 export async function onRequest(
   context: EventContext<any, any, any>
 ): Promise<Response> {
   try {
-    // get and decode the path parameter
-    const encodedName = String(context.params.name);
-    const name = decodeURIComponent(encodedName).toLowerCase();
+    const { searchParams } = new URL(context.request.url);
+    const name = searchParams.get("name")?.toLowerCase();
+    // validate name is provided
+    if (!name) {
+      return new Response("Missing name parameter", { status: 400 });
+    }
     // validate the input against SNS spec
     if (!validateName(name)) {
       return new Response("Invalid input per SNS spec", { status: 400 });
     }
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
-    // determine layer selections
-    const selectedLayers = selectLayers(hashArray);
-    // return selected layers
-    return new Response(JSON.stringify(selectedLayers, null, 2), {
-      status: 200,
-    });
+    // return hash array
+    return new Response(hashArray.join(","), { status: 200 });
   } catch (err) {
     // return error as string
     return new Response(String(err), { status: 404 });
