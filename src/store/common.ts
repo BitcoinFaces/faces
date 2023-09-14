@@ -37,5 +37,5 @@ export async function createHashArray(input: string) {
 // https://docs.satsnames.org/sats-names/sns-spec/mint-names#registration-limitations
 // regex ensures that: no spaces, only one period, no leading or trailing periods
 export function validateName(name: string) {
-  return !/^[^\s.]*\.?[^\s.]*$/.test(name) ? true : false;
+  return /^[^\s.]*\.?[^\s.]*$/.test(name) ? true : false;
 }
