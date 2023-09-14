@@ -333,10 +333,12 @@ export function createLayers(
 ) {
   return Object.entries(layers)
     .filter(([key, value]) => value !== undefined)
-    .map(([key, value]) => {
+    .map(([key, value], index) => {
       if (onchain) {
         // return a link to the on-chain image hash
-        return `<image id="${key}" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
+        return `<image id="${key}-${
+          index + 1
+        }" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
       }
       // return the matching layer in the cache
       return value;
