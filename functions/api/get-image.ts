@@ -24,7 +24,7 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const selectedLayers = selectLayers(hashArray);
+    const selectedLayers = selectLayers(hashArray, cache);
     // create svg layers from selected layers
     const svgLayers = createLayers(selectedLayers, cache);
     // create svg file from svg layers
