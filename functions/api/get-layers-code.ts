@@ -1,5 +1,5 @@
 import { EventContext } from "@cloudflare/workers-types";
-import { createHashArray, validateName } from "../../src/store/common";
+import { createHashArray } from "../../src/store/common";
 import { selectLayers } from "../../src/store/faces";
 
 export async function onRequest(

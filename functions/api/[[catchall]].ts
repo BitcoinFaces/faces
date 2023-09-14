@@ -1,4 +1,4 @@
-export async function onRequest({ request }): Promise<Response> {
+export async function onRequest(): Promise<Response> {
   return new Response(
     `Welcome to the Bitcoin Faces API! Supported endpoints below:
  - /api/get-svg-code?name=yourname.sats
