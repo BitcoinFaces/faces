@@ -326,13 +326,13 @@ export function listLayers(hashArray: number[], onchain = false) {
   return listedLayers;
 }
 
-// TODO: how to better handle undefined layers?
 export function createLayers(
   layers: LayerSelection,
   onchain = false,
   host = "/content"
 ) {
   return Object.entries(layers)
+    .filter(([key, value]) => value !== undefined)
     .map(([key, value]) => {
       if (onchain) {
         // return a link to the on-chain image hash
