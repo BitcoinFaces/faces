@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Bitcoin Faces API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/get-hash-array": {
+      "get": {
+        "summary": "Get Hash Array",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "example": "hash1,hash2,hash3"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing name parameter"
+          },
+          "404": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/api/get-image": {
+      "get": {
+        "summary": "Get Image",
+        "responses": {
+          "400": {
+            "description": "Missing name parameter"
+          },
+          "404": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "example": "Example output"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get-layers": {
+      "get": {
+        "summary": "Get Layers",
+        "responses": {
+          "400": {
+            "description": "Missing name parameter"
+          },
+          "404": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "example": "Example output"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get-layers-code": {
+      "get": {
+        "summary": "Get Layers Code",
+        "responses": {
+          "400": {
+            "description": "Missing name parameter"
+          },
+          "404": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "example": "Example output"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get-svg-code": {
+      "get": {
+        "summary": "Get SVG Code",
+        "responses": {
+          "400": {
+            "description": "Missing name parameter"
+          },
+          "404": {
+            "description": "Error"
+          },
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "example": "Example output"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
