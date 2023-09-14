@@ -26,7 +26,7 @@ export async function onRequest(
     const selectedLayers = selectLayers(hashArray);
     // check for query parameter
     const url = new URL(context.request.url);
-    if (url.searchParams.get("cached") === "true") {
+    if (url.searchParams.get("cache") === "true") {
       useCache = true;
     }
     // create svg layers from selected layers
