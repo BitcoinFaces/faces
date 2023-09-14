@@ -326,7 +326,7 @@ export function listLayers(hashArray: number[], onchain = false) {
   return listedLayers;
 }
 
-// TODO: how to handle undefined layers?
+// TODO: how to better handle undefined layers?
 export function createLayers(
   layers: LayerSelection,
   onchain = false,
@@ -344,7 +344,12 @@ export function createLayers(
     .join("\n");
 }
 
-export function createSvgFile(svgLayers: string) {
+export function createSvgFile(
+  name: string,
+  svgLayers: string,
+  width = 500,
+  height = 500
+) {
   // TODO: add flag for laser eyes, add defs
-  return `<svg id="BitcoinFace" width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
+  return `<svg id="Bitcoin Face for ${name}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
 }
