@@ -240,11 +240,13 @@ export function createLayers(layers: LayerSelection, useCache = false) {
         // return the matching layer in the cache
         return `work in progress`;
       }
-      return `<image id="${key}" xlink:href="https://inscribe.news/api/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
+      // return a link to the on-chain image
+      return `<image id="${key}" xlink:href="/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
     })
     .join("\n");
 }
 
 export function createSvgFile(svgLayers: string) {
+  // TODO: add flag for laser eyes, add defs
   return `<svg id="BitcoinFace" width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
 }
