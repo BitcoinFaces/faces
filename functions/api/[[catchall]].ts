@@ -1,5 +1,9 @@
 export async function onRequest({ request }): Promise<Response> {
   return new Response(
-    `Welcome to the Bitcoin Faces API! Provide a string to the path to generate a Bitcoin Face SVG. e.g. /api/yourname.sats`
+    `Welcome to the Bitcoin Faces API! Supported endpoints below:
+    - /api/get-svg-code/yourname.sats
+    - /api/get-image/yourname.sats
+    - /api/get-hash-array/yourname.sats
+    - /api/get-layers/yourname.sats`
   );
 }
