@@ -8,6 +8,7 @@
     "/api/get-hash-array": {
       "get": {
         "summary": "Get Hash Array",
+        "description": "Returns an array of hashes for the given string",
         "parameters": [
           {
             "name": "name",
@@ -23,7 +24,7 @@
             "description": "Successful Response",
             "content": {
               "text/plain": {
-                "example": "hash1,hash2,hash3"
+                "example": "hash1,hash2,hash3..."
               }
             }
           },
@@ -39,6 +40,7 @@
     "/api/get-image": {
       "get": {
         "summary": "Get Image",
+        "description": "Returns an SVG image for the given string, composed of layers selected based on the hash array",
         "responses": {
           "400": {
             "description": "Missing name parameter"
@@ -49,8 +51,8 @@
           "200": {
             "description": "Successful Response",
             "content": {
-              "text/plain": {
-                "example": "Example output"
+              "image/svg+xml": {
+                "example": "<svg id=\"Bitcoin face for yourname.sats\" width=\"500\" height=\"500\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">...contents of SVG...</svg>"
               }
             }
           }
@@ -60,6 +62,7 @@
     "/api/get-layers": {
       "get": {
         "summary": "Get Layers",
+        "description": "Returns an array of layers for the given string, selected based on the hash array",
         "responses": {
           "400": {
             "description": "Missing name parameter"
@@ -71,7 +74,19 @@
             "description": "Successful Response",
             "content": {
               "text/plain": {
-                "example": "Example output"
+                "example": [
+                  "background-5",
+                  "body-7",
+                  "head-4",
+                  "ears-7",
+                  "eyes-6",
+                  "nose-2",
+                  "mouth-5",
+                  "chain-1",
+                  "earring-4",
+                  "glasses-1",
+                  "hat-1"
+                ]
               }
             }
           }
@@ -81,6 +96,7 @@
     "/api/get-layers-code": {
       "get": {
         "summary": "Get Layers Code",
+        "description": "Returns an object with each layer and the related SVG code for the given string, selected based on the hash array",
         "responses": {
           "400": {
             "description": "Missing name parameter"
@@ -92,7 +108,18 @@
             "description": "Successful Response",
             "content": {
               "text/plain": {
-                "example": "Example output"
+                "example": {
+                  "background": "<svg>...</svg>",
+                  "body": "<svg>...</svg>",
+                  "head": "<svg>...</svg>",
+                  "ears": "<svg>...</svg>",
+                  "eyes": "<svg>...</svg>",
+                  "nose": "<svg>...</svg>",
+                  "mouth": "<svg>...</svg>",
+                  "chain": "<svg>...</svg>",
+                  "glasses": "<svg>...</svg>",
+                  "hat": "<svg>...</svg>"
+                }
               }
             }
           }
@@ -102,6 +129,7 @@
     "/api/get-svg-code": {
       "get": {
         "summary": "Get SVG Code",
+        "description": "Returns the SVG code for the given string, composed of layers selected based on the hash array",
         "responses": {
           "400": {
             "description": "Missing name parameter"
@@ -113,7 +141,7 @@
             "description": "Successful Response",
             "content": {
               "text/plain": {
-                "example": "Example output"
+                "example": "<svg id=\"Bitcoin face for yourname.sats\" width=\"500\" height=\"500\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">...contents of SVG...</svg>"
               }
             }
           }
