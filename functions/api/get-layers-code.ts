@@ -1,6 +1,6 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { createHashArray, validateName } from "../../src/store/common";
-import { listLayers } from "../../src/store/faces";
+import { selectLayers } from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -16,9 +16,9 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const listedLayers = listLayers(hashArray, onchain);
+    const selectedLayers = selectLayers(hashArray, onchain);
     // return selected layers
-    return new Response(JSON.stringify(listedLayers, null, 2), {
+    return new Response(JSON.stringify(selectedLayers, null, 2), {
       status: 200,
     });
   } catch (err) {
