@@ -19,10 +19,6 @@ export async function onRequest(
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
     }
-    // validate the input against SNS spec
-    if (!validateName(name)) {
-      return new Response("Invalid input per SNS spec", { status: 400 });
-    }
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
