@@ -1,6 +1,6 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { createHashArray } from "../../src/store/common";
-import { listLayers } from "../../src/store/faces";
+import { getLayers, selectLayers } from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -10,6 +10,9 @@ export async function onRequest(
     const name = searchParams.get("name")?.toLowerCase();
     const layerName = searchParams.get("layerName")?.toLowerCase();
     const onchain = searchParams.get("onchain") === "true";
+    const host = searchParams.get("host")
+      ? searchParams.get("host")!
+      : undefined;
     // validate name is provided
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
@@ -21,13 +24,15 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const listedLayers = listLayers(hashArray, onchain);
+    const selectedLayers = selectLayers(hashArray, onchain);
+    // create svg layers from selected layers
+    const svgLayers = getLayers(selectedLayers, onchain, host);
     // get selected layer
-    if (!listedLayers[layerName]) {
+    if (!svgLayers[layerName]) {
       return new Response(`Layer not found: ${layerName}`, { status: 404 });
     }
     // return selected layer
-    return new Response(listedLayers[layerName], {
+    return new Response(svgLayers[layerName], {
       status: 200,
     });
   } catch (err) {
