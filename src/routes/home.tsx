@@ -1,12 +1,7 @@
 import { SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import BitcoinFaceLogo from "./bitcoin-face-174-logo";
-import SwaggerUI from "swagger-ui-react";
-import "swagger-ui-react/swagger-ui.css";
+import BitcoinFaceLogo from "../components/layout/bitcoin-face-174-logo";
 
-function Content() {
-  return <SwaggerUI url="/openapi_spec.json" />;
-
-  // temporary testing
+function Home() {
   return (
     <SimpleGrid width="100%" maxW="1200px">
       <Stack alignItems="center">
@@ -17,4 +12,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Home;

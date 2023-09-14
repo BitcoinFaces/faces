@@ -1,7 +1,20 @@
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import theme from "./theme";
-import Content from "./components/layout/page-content";
 import CustomFonts from "./components/layout/custom-fonts";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./routes/home";
+import Docs from "./routes/docs";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/docs",
+    element: <Docs />,
+  },
+]);
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -12,7 +25,7 @@ export const App = () => (
       alignItems="center"
       justifyContent="center"
     >
-      <Content />
+      <RouterProvider router={router} />
     </Flex>
   </ChakraProvider>
 );
