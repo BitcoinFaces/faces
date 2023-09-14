@@ -331,18 +331,19 @@ export function getLayers(
   onchain = false,
   host = "/content"
 ) {
-  return Object.entries(layers)
+  const result: { [key: string]: string } = {};
+  Object.entries(layers)
     .filter(([key, value]) => value !== undefined)
-    .map(([key, value], index) => {
+    .forEach(([key, value], index) => {
       if (onchain) {
-        // return a link to the on-chain image hash
-        return `<image id="${key}-${
+        result[key] = `<image id="${key}-${
           index + 1
         }" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
+      } else {
+        result[key] = value as string;
       }
-      // return the matching layer in the cache
-      return value;
     });
+  return result;
 }
 
 export function createLayers(
