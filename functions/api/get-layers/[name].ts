@@ -1,5 +1,5 @@
 import { EventContext } from "@cloudflare/workers-types";
-import { createHashArray } from "../../../src/store/common";
+import { createHashArray, validateName } from "../../../src/store/common";
 import { selectLayers } from "../../../src/store/faces";
 
 export async function onRequest(
@@ -10,9 +10,7 @@ export async function onRequest(
     const encodedName = String(context.params.name);
     const name = decodeURIComponent(encodedName).toLowerCase();
     // validate the input against SNS spec
-    // https://docs.satsnames.org/sats-names/sns-spec/mint-names#registration-limitations
-    // regex ensures that: no spaces, only one period, no leading or trailing periods
-    if (!/^[^\s.]*\.?[^\s.]*$/.test(name)) {
+    if (!validateName(name)) {
       return new Response("Invalid input per SNS spec", { status: 400 });
     }
     // create a hash array from the input string
@@ -20,7 +18,9 @@ export async function onRequest(
     // determine layer selections
     const selectedLayers = selectLayers(hashArray);
     // return selected layers
-    return new Response(JSON.stringify(selectedLayers), { status: 200 });
+    return new Response(JSON.stringify(selectedLayers, null, 2), {
+      status: 200,
+    });
   } catch (err) {
     // return error as string
     return new Response(String(err), { status: 404 });
