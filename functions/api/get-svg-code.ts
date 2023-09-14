@@ -1,10 +1,17 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { createHashArray } from "../../src/store/common";
-import { selectLayers } from "../../src/store/faces";
+import {
+  createLayers,
+  createSvgFile,
+  selectLayers,
+} from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
 ): Promise<Response> {
+  // flag for using cached SVG code
+  let useCache = false;
+
   try {
     // get and decode the path parameter
     const encodedName = String(context.params.name);
@@ -19,35 +26,17 @@ export async function onRequest(
     const hashArray = await createHashArray(name);
     // determine layer selections
     const selectedLayers = selectLayers(hashArray);
-    // create svg from layers
-    const svgLayers = Object.entries(selectedLayers)
-      .map(([key, hash]) => {
-        return `<image id="${key}" xlink:href="https://inscribe.news/api/content/${hash}" x="0" y="0" width="500" height="500"></image>`;
-      })
-      .join("\n");
-
-    const svg = `<svg id="BitcoinFace" width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
-
     // check for query parameter
-    if (context.request.url.includes("format=image")) {
-      return new Response(svg, {
-        headers: { "Content-Type": "image/svg+xml" },
-      });
+    const url = new URL(context.request.url);
+    if (url.searchParams.get("cached") === "true") {
+      useCache = true;
     }
-
-    // return details as JSON
-    return new Response(
-      JSON.stringify(
-        {
-          name,
-          hashArray,
-          selectedLayers,
-          svg,
-        },
-        null,
-        1
-      )
-    );
+    // create svg layers from selected layers
+    const svgLayers = createLayers(selectedLayers, useCache);
+    // create svg file from svg layers
+    const svgFile = createSvgFile(svgLayers);
+    // return svg code as string
+    return new Response(svgFile, { status: 200 });
   } catch (err) {
     // return error as string
     return new Response(String(err), { status: 404 });
