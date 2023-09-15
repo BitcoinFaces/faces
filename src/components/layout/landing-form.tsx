@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Input,
@@ -20,26 +21,44 @@ function LandingForm() {
   };
 
   return (
-    <Stack spacing={6} direction="column" w="100%" maxW="600px" m="0 auto">
-      <BitcoinFacesTextLogo />
-      <Text>Every name has a Bitcoin Face. Claim yours first.</Text>
-      <FormControl id="name" isRequired>
-        <Input
-          type="text"
-          placeholder="E.g. satoshi.sats"
-          fontSize="xl"
-          py={6}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </FormControl>
-      <Button
-        loadingText="Submitting"
-        size="lg"
-        height="52px"
-        onClick={handleSubmit}
+    <Stack
+      spacing={4}
+      direction="column"
+      height="100%"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box w="90%">
+        <BitcoinFacesTextLogo />
+      </Box>
+      <Text textAlign="center" fontSize="2xl">
+        Every name has a Bitcoin Face. Claim yours first.
+      </Text>
+      <Stack
+        direction={["column", "row"]}
+        alignItems="center"
+        justifyContent="space-evenly"
+        w="90%"
       >
-        Claim now
-      </Button>
+        <FormControl id="name" width={["100%", "50%"]} isRequired>
+          <Input
+            type="text"
+            placeholder="E.g. satoshi.sats"
+            fontSize="xl"
+            py={6}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </FormControl>
+        <Button
+          loadingText="Submitting"
+          size="lg"
+          height="52px"
+          width={["100%", "50%"]}
+          onClick={handleSubmit}
+        >
+          Claim now
+        </Button>
+      </Stack>
     </Stack>
   );
 }

@@ -56,14 +56,13 @@ function Home() {
         {fillGrid()}
         <Box
           gridColumn={{
+            base: "1 / span 4",
+            md: "2 / span 4",
             lg: "3 / span 4",
-            md: "3 / span 3",
-            sm: "1 / span 4",
           }}
           gridRow={{
-            lg: "3 / span 3",
+            base: "3 / span 3",
             md: "3 / span 3",
-            sm: "3 / span 5",
           }}
           w="100%"
           h="100%"
