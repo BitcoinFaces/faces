@@ -4,7 +4,7 @@ import LandingForm from "../components/layout/landing-form";
 import { FACES_COMPONENTS } from "../store/faces";
 
 function Home() {
-  const numImages = useBreakpointValue({ base: 24, md: 54, lg: 76 }) ?? 12;
+  const numImages = useBreakpointValue({ base: 152, md: 204, lg: 300 }) ?? 12;
   const size = useBreakpointValue({ base: 75, md: 100, lg: 125 }) ?? 75;
   const columns = useBreakpointValue({ base: 4, md: 6, lg: 8 }) ?? 4;
 
