@@ -2,6 +2,8 @@
 // CONSTANTS
 /////////////////////////
 
+import { atom } from "jotai";
+
 // TBD
 
 /////////////////////////
@@ -11,10 +13,10 @@
 // TBD
 
 /////////////////////////
-// LOCAL STORAGE ATOMS
+// STORAGE ATOMS
 /////////////////////////
 
-// TBD
+export const selectedNameAtom = atom("");
 
 /////////////////////////
 // HELPER FUNCTIONS

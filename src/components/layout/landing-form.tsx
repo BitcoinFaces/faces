@@ -1,23 +1,38 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   FormControl,
   Input,
+  Heading,
+  Link as ChakraLink,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  ModalFooter,
   Stack,
   Text,
-  useControllableState,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { useAtom } from "jotai";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
+import { selectedNameAtom } from "../../store/common";
+import { useClipboardToast } from "../../hooks/use-clipboard-toast";
+import BitcoinFaceLogo from "./bitcoin-face-174-logo";
 
 function LandingForm() {
-  // form field
-  const [name, setName] = useControllableState({ defaultValue: "" });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const copyText = useClipboardToast();
+  const [name, setName] = useAtom(selectedNameAtom);
 
   // form submission handler
   const handleSubmit = () => {
     console.log("provided name:", name);
-    // fetch from API (or use functions directly?)
-    // open modal with information
+    setName(name);
+    onOpen();
   };
 
   return (
@@ -60,6 +75,66 @@ function LandingForm() {
           Claim now
         </Button>
       </Stack>
+      <Modal
+        allowPinchZoom
+        autoFocus
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        size={["full", "full", "xl"]}
+        scrollBehavior="inside"
+        closeOnOverlayClick={false}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Heading>Ready to Inscribe</Heading>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack direction="column" alignItems="center" spacing={2}>
+              <BitcoinFaceLogo height="200px" width="200px" />
+              <Text>Selected Name: {name}</Text>
+              <ButtonGroup>
+                <Button
+                  whiteSpace="nowrap"
+                  variant="orange"
+                  onClick={() => copyText(name)}
+                >
+                  Copy to Clipboard
+                </Button>
+                <Button
+                  whiteSpace="nowrap"
+                  variant="orange"
+                  onClick={() => copyText(name)}
+                >
+                  Save to File
+                </Button>
+              </ButtonGroup>
+              <Text>
+                Use the "plain text" inscription type if you're using a service,
+                or make sure the file's type is `.svg` if using the Ordinals
+                CLI.
+              </Text>
+              <Text>
+                See the{" "}
+                <ChakraLink
+                  href="https://github.com/neu-fi/awesome-ordinals"
+                  isExternal
+                >
+                  Ordinals Awesome List
+                </ChakraLink>{" "}
+                for even more inscription services.{" "}
+              </Text>
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Button mr={3} onClick={onClose} size="md" borderRadius="xl">
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 }
