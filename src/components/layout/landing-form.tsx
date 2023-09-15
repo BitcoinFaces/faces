@@ -31,6 +31,7 @@ function LandingForm() {
   // form submission handler
   const handleSubmit = () => {
     console.log("provided name:", name);
+    if (!name) return;
     setName(name);
     onOpen();
   };
@@ -42,20 +43,25 @@ function LandingForm() {
       height="100%"
       alignItems="center"
       justifyContent="center"
+      py={2}
     >
       <Box w="90%">
         <BitcoinFacesTextLogo />
       </Box>
-      <Text textAlign="center" fontSize={["sm", null, "lg", "2xl"]}>
+      <Text
+        textAlign="center"
+        fontWeight="bold"
+        fontSize={["xl", null, "3xl", "4xl"]}
+      >
         Every name has a Bitcoin Face. Claim yours first.
       </Text>
       <Stack
-        direction={["column", "row"]}
+        direction={["column", null, "row"]}
         alignItems="center"
         justifyContent="space-evenly"
         w="90%"
       >
-        <FormControl id="name" width={["100%", "50%"]} isRequired>
+        <FormControl id="name" width={["100%", null, "50%"]} isRequired>
           <Input
             type="text"
             placeholder="E.g. satoshi.sats"
@@ -69,7 +75,7 @@ function LandingForm() {
           variant="orange"
           size="lg"
           height="52px"
-          width={["100%", "50%"]}
+          width={["100%", null, "50%"]}
           onClick={handleSubmit}
         >
           Claim now

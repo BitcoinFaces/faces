@@ -34,11 +34,18 @@ function Home() {
     for (let i = 0; i < numImages; i++) {
       // const Logo = logos[i % logos.length];
       elements.push(
-        <BitcoinFaceLogo
-          key={i}
+        <Box
+          key={`box-${i}`}
           width={size.toString()}
           height={size.toString()}
-        />
+          borderRadius="full"
+        >
+          <BitcoinFaceLogo
+            key={`face-${i}`}
+            width={size.toString()}
+            height={size.toString()}
+          />
+        </Box>
       );
     }
     return elements;
