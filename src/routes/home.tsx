@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useBreakpointValue, SimpleGrid, Flex } from "@chakra-ui/react";
+import { useBreakpointValue, SimpleGrid, Flex, Box } from "@chakra-ui/react";
 import BitcoinFaceLogo from "../components/layout/bitcoin-face-174-logo";
 import TitleBar from "../components/layout/title-bar";
+import LandingForm from "../components/layout/landing-form";
 // import Logo1 from "../components/layout/Logo1";
 // import Logo2 from "../components/layout/Logo2";
 // ... import other logos
@@ -53,6 +54,22 @@ function Home() {
         alignItems="center"
       >
         {fillGrid()}
+        <Box
+          gridColumn={{
+            lg: "3 / span 4",
+            md: "3 / span 3",
+            sm: "1 / span 4",
+          }}
+          gridRow={{
+            lg: "3 / span 3",
+            md: "3 / span 3",
+            sm: "3 / span 5",
+          }}
+          w="100%"
+          h="100%"
+        >
+          <LandingForm />
+        </Box>
       </SimpleGrid>
       <TitleBar />
     </Flex>
