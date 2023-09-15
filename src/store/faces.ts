@@ -294,6 +294,11 @@ export type LayerSelection = {
   [key: string]: string | undefined;
 };
 
+export type BitcoinFaceLogoProps = {
+  width: string;
+  height: string;
+};
+
 /////////////////////////
 // HELPER FUNCTIONS
 /////////////////////////
