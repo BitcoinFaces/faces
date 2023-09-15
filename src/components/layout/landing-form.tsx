@@ -31,7 +31,7 @@ function LandingForm() {
       <Box w="90%">
         <BitcoinFacesTextLogo />
       </Box>
-      <Text textAlign="center" fontSize="2xl">
+      <Text textAlign="center" fontSize={["sm", null, "lg", "2xl"]}>
         Every name has a Bitcoin Face. Claim yours first.
       </Text>
       <Stack
@@ -51,6 +51,7 @@ function LandingForm() {
         </FormControl>
         <Button
           loadingText="Submitting"
+          variant="orange"
           size="lg"
           height="52px"
           width={["100%", "50%"]}

@@ -13,8 +13,8 @@ const { definePartsStyle, defineMultiStyleConfig } =
 // Chakra theme configuration
 const config: ThemeConfig = {
   initialColorMode: "light",
-  useSystemColorMode: true,
-  cssVarPrefix: "citycoin",
+  useSystemColorMode: false,
+  cssVarPrefix: "btc-faces",
 };
 
 const fonts = {
@@ -42,12 +42,64 @@ const tabsBaseStyle = definePartsStyle({
   },
 });
 
+const buttonStyles = {
+  variants: {
+    orange: {
+      bg: "#FF9300",
+      color: "white",
+      _hover: {
+        bg: "orange.400",
+      },
+      _active: {
+        bg: "orange.500",
+      },
+    },
+    "orange-outline": {
+      bg: "transparent",
+      color: "white",
+      border: "1px solid",
+      borderColor: "#FF9300",
+      _hover: {
+        color: "#FF9300",
+      },
+      _active: {
+        bg: "orange.400",
+      },
+    },
+  },
+};
+
+const inputStyles = {
+  baseStyle: {
+    field: {
+      bg: "white",
+      borderColor: "gray.300",
+      borderWidth: 2,
+      color: "black",
+      ":focus": {
+        borderColor: "#FF9300",
+      },
+      "::placeholder": {
+        color: "--gray-300",
+      },
+    },
+    _hover: {
+      borderColor: "#FF9300",
+    },
+  },
+  defaultProps: {
+    variant: null,
+  },
+};
+
 // Export the component theme
 export const tabsTheme = defineMultiStyleConfig({ baseStyle: tabsBaseStyle });
 
 const theme = extendTheme({
   config,
   components: {
+    Button: buttonStyles,
+    Input: inputStyles,
     Link: linkStyles,
     Tabs: tabsTheme,
   },
