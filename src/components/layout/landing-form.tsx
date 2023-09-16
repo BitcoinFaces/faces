@@ -1,15 +1,11 @@
 import {
   Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Box,
   Button,
   ButtonGroup,
   FormControl,
   Input,
   Heading,
-  Link as ChakraLink,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -23,17 +19,21 @@ import {
   UnorderedList,
   ListItem,
   Code,
+  Skeleton,
 } from "@chakra-ui/react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { loadable } from "jotai/utils";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
-import { FACES_COMPONENTS } from "../../store/faces";
+import { FACES_COMPONENTS, svgCodeAtom } from "../../store/faces";
 
 function LandingForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const copyText = useClipboardToast();
   const [name, setName] = useAtom(selectedNameAtom);
+  const loadNameSvgCode = loadable(svgCodeAtom);
+  const nameSvgCode = useAtomValue(loadNameSvgCode);
 
   // form submission handler
   const handleSubmit = () => {
@@ -109,14 +109,25 @@ function LandingForm() {
           <ModalBody>
             <Stack direction="column" alignItems="center" spacing={2}>
               <Box
-                width="200"
-                height="200"
                 borderRadius="lg"
                 style={{
                   overflow: "hidden",
                 }}
               >
-                <Face width="200" height="200" />
+                <Skeleton isLoaded={nameSvgCode.state !== "loading"}>
+                  {nameSvgCode.state === "hasData" ? (
+                    <Box
+                      width="100%"
+                      maxW="200px"
+                      maxH="200px"
+                      transform="scale(0.4)"
+                      transformOrigin="top left"
+                      dangerouslySetInnerHTML={{ __html: nameSvgCode.data }}
+                    />
+                  ) : (
+                    <Face width="200" height="200" />
+                  )}
+                </Skeleton>
               </Box>
               <Text>
                 Selected Name:{" "}
@@ -134,16 +145,14 @@ function LandingForm() {
                       image/svg+xml
                     </Code>
                   </Text>
-                  <Text>
-                    Upload to an inscription service like:
-                    <UnorderedList>
-                      <ListItem>Ordinals Bot</ListItem>
-                      <ListItem>Unisat</ListItem>
-                      <ListItem>OrdSwap</ListItem>
-                      <ListItem>could find more</ListItem>
-                      <ListItem>could link awesome list</ListItem>
-                    </UnorderedList>
-                  </Text>
+                  <Text>Upload to an inscription service like:</Text>
+                  <UnorderedList>
+                    <ListItem>Ordinals Bot</ListItem>
+                    <ListItem>Unisat</ListItem>
+                    <ListItem>OrdSwap</ListItem>
+                    <ListItem>could find more</ListItem>
+                    <ListItem>could link awesome list</ListItem>
+                  </UnorderedList>
                 </Stack>
               </Alert>
             </Stack>

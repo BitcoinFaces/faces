@@ -28,6 +28,8 @@ import BitcoinFace27 from "../components/faces/bitcoin-face-27";
 import BitcoinFace28 from "../components/faces/bitcoin-face-28";
 import BitcoinFace29 from "../components/faces/bitcoin-face-29";
 import BitcoinFace30 from "../components/faces/bitcoin-face-30";
+import { createHashArray, selectedNameAtom } from "./common";
+import { atom } from "jotai";
 
 /////////////////////////
 // CONSTANTS
@@ -363,6 +365,20 @@ export type BitcoinFaceLogoProps = {
   width: string;
   height: string;
 };
+
+/////////////////////////
+// DERIVED ATOMS
+/////////////////////////
+
+export const svgCodeAtom = atom(async (get) => {
+  const name = get(selectedNameAtom);
+  if (!name) return "";
+  const hashArray = await createHashArray(name);
+  const selectedLayers = selectLayers(hashArray);
+  const svgLayers = createLayers(selectedLayers);
+  const svgCode = createSvgFile(name, svgLayers);
+  return svgCode;
+});
 
 /////////////////////////
 // HELPER FUNCTIONS
