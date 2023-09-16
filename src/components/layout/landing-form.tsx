@@ -106,7 +106,7 @@ function LandingForm() {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Stack direction="column" alignItems="center" spacing={2}>
+            <Stack direction="column" spacing={2}>
               <Box
                 borderRadius="lg"
                 style={{
@@ -128,58 +128,60 @@ function LandingForm() {
                   )}
                 </Skeleton>
               </Box>
-              <Text alignSelf="flex-start">
+              <Text>
                 Congrats! You've generated the Bitcoin Face for{" "}
                 <Box as="span" fontWeight="bold">
                   {name}
                 </Box>
               </Text>
-              <Text alignSelf="flex-start">
+              <Text>
                 The first person to inscribe each face claims ownership. First
                 is first.
               </Text>
-              <Alert variant="orange">
-                <Stack>
-                  <Text fontWeight="bold">How to claim ownership:</Text>
-                  <OrderedList spacing={2}>
-                    <ListItem>
-                      <Stack>
-                        <Text>Save File</Text>
-                        <Button
-                          whiteSpace="nowrap"
-                          variant="orange"
-                          size={["sm", null, "md"]}
-                          w="fit-content"
-                          onClick={() => copyText(name)}
-                        >
-                          Download your face
-                        </Button>
-                      </Stack>
-                    </ListItem>
-                    <ListItem>
-                      <Stack>
-                        <Text>Inscribe</Text>
-                        <Text>
-                          Go to{" "}
-                          <ChakraLink isExternal href="https://ordinalsbot.com">
-                            ordinalsbot.com
-                          </ChakraLink>
-                          , upload your face and inscribe!
-                        </Text>
-                      </Stack>
-                    </ListItem>
-                    <ListItem>
-                      <Stack>
-                        <Text>Share on X</Text>
-                        <Text>
-                          Post a picture of your newly owned Bitcoin Face and
-                          tag @bitcoinfaces
-                        </Text>
-                      </Stack>
-                    </ListItem>
-                  </OrderedList>
-                </Stack>
-              </Alert>
+              <Stack>
+                <Text fontWeight="bold">How to claim ownership:</Text>
+                <OrderedList
+                  stylePosition="outside"
+                  marginStart={6}
+                  spacing={2}
+                >
+                  <ListItem>
+                    <Stack>
+                      <Text>Save File</Text>
+                      <Button
+                        whiteSpace="nowrap"
+                        variant="orange"
+                        size={["sm", null, "md"]}
+                        w="fit-content"
+                        onClick={() => copyText(name)}
+                      >
+                        Download your face
+                      </Button>
+                    </Stack>
+                  </ListItem>
+                  <ListItem>
+                    <Stack>
+                      <Text>Inscribe</Text>
+                      <Text>
+                        Go to{" "}
+                        <ChakraLink isExternal href="https://ordinalsbot.com">
+                          ordinalsbot.com
+                        </ChakraLink>
+                        , upload your face and inscribe!
+                      </Text>
+                    </Stack>
+                  </ListItem>
+                  <ListItem>
+                    <Stack>
+                      <Text>Share on 𝕏</Text>
+                      <Text>
+                        Post a picture of your newly owned Bitcoin Face and tag
+                        @bitcoinfaces
+                      </Text>
+                    </Stack>
+                  </ListItem>
+                </OrderedList>
+              </Stack>
             </Stack>
           </ModalBody>
           <ModalFooter>
