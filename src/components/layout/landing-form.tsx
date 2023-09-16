@@ -20,6 +20,7 @@ import {
   OrderedList,
   ButtonGroup,
   IconButton,
+  Alert,
 } from "@chakra-ui/react";
 
 import { useAtom, useAtomValue } from "jotai";
@@ -123,114 +124,111 @@ function LandingForm() {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Stack direction="column" spacing={2}>
-              <Box
-                borderRadius="lg"
-                alignSelf="center"
-                style={{
-                  overflow: "hidden",
-                }}
-              >
-                <Skeleton isLoaded={nameData.state !== "loading"}>
-                  {nameData.state === "hasData" && nameData.data ? (
-                    <Box
-                      width="200px"
-                      height="200px"
-                      transform="scale(0.4)"
-                      transformOrigin="top left"
-                      dangerouslySetInnerHTML={{
-                        __html: nameData.data.svgCode.local,
-                      }}
-                    />
-                  ) : (
-                    <Face width="200" height="200" />
-                  )}
-                </Skeleton>
-              </Box>
-              <ButtonGroup alignSelf="center" size="lg">
-                <IconButton
-                  aria-label="Download Bitcoin Face"
-                  title="Download Bitcoin Face"
-                  icon={<FaDownload />}
-                  disabled={nameData.state === "loading"}
-                  onClick={handleDownload}
-                />
-                <IconButton
-                  aria-label="Copy Source Code"
-                  title="Copy Source Code"
-                  icon={<FaCode />}
-                  disabled={nameData.state === "loading"}
-                  onClick={() => {
-                    if (nameData.state === "hasData" && nameData.data) {
-                      copyText(nameData.data.svgCode.onchain);
-                    }
-                  }}
-                />
-                <IconButton
-                  aria-label="Share on X (Twitter)"
-                  title="Share on X (Twitter)"
-                  icon={<FaTwitter />}
-                  as="a"
-                  href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              </ButtonGroup>
-              <Text>
-                Congrats! You've generated the Bitcoin Face for{" "}
-                <Box as="span" fontWeight="bold">
-                  {name}
-                </Box>
-              </Text>
-              <Text>
-                The first person to inscribe each face claims ownership. First
-                is first.
-              </Text>
+            <Stack direction="column" spacing={4}>
               <Stack>
-                <Text fontWeight="bold">How to claim ownership:</Text>
-                <OrderedList
-                  stylePosition="outside"
-                  marginStart={6}
-                  spacing={2}
+                <Box
+                  borderRadius="lg"
+                  alignSelf="center"
+                  style={{
+                    overflow: "hidden",
+                  }}
                 >
-                  <ListItem>
-                    <Stack>
-                      <Text>Save File</Text>
-                      <Button
-                        whiteSpace="nowrap"
-                        variant="orange"
-                        size={["sm", null, "md"]}
-                        w="fit-content"
-                        disabled={nameData.state === "loading"}
-                        onClick={handleDownload}
-                      >
-                        Download your face
-                      </Button>
-                    </Stack>
-                  </ListItem>
-                  <ListItem>
-                    <Stack>
-                      <Text>Inscribe</Text>
-                      <Text>
-                        Go to{" "}
-                        <ChakraLink isExternal href="https://ordinalsbot.com">
-                          ordinalsbot.com
-                        </ChakraLink>
-                        , upload your face and inscribe!
-                      </Text>
-                    </Stack>
-                  </ListItem>
-                  <ListItem>
-                    <Stack>
-                      <Text>Share on 𝕏</Text>
-                      <Text>
-                        Post a picture of your newly owned Bitcoin Face and tag
-                        @bitcoinfaces
-                      </Text>
-                    </Stack>
-                  </ListItem>
-                </OrderedList>
+                  <Skeleton isLoaded={nameData.state !== "loading"}>
+                    {nameData.state === "hasData" && nameData.data ? (
+                      <Box
+                        width="200px"
+                        height="200px"
+                        transform="scale(0.4)"
+                        transformOrigin="top left"
+                        dangerouslySetInnerHTML={{
+                          __html: nameData.data.svgCode.local,
+                        }}
+                      />
+                    ) : (
+                      <Face width="200" height="200" />
+                    )}
+                  </Skeleton>
+                </Box>
+                <ButtonGroup alignSelf="center" size="lg">
+                  <IconButton
+                    aria-label="Download Bitcoin Face"
+                    title="Download Bitcoin Face"
+                    icon={<FaDownload />}
+                    disabled={nameData.state === "loading"}
+                    onClick={handleDownload}
+                  />
+                  <IconButton
+                    aria-label="Copy Source Code"
+                    title="Copy Source Code"
+                    icon={<FaCode />}
+                    disabled={nameData.state === "loading"}
+                    onClick={() => {
+                      if (nameData.state === "hasData" && nameData.data) {
+                        copyText(nameData.data.svgCode.onchain);
+                      }
+                    }}
+                  />
+                  <IconButton
+                    aria-label="Share on X (Twitter)"
+                    title="Share on X (Twitter)"
+                    icon={<FaTwitter />}
+                    as="a"
+                    href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                </ButtonGroup>
               </Stack>
+              <Stack>
+                <Text>
+                  Congrats! You've generated the Bitcoin Face for{" "}
+                  <Box as="span" fontWeight="bold">
+                    {name}
+                  </Box>
+                </Text>
+                <Text>
+                  The first person to inscribe each face claims ownership. First
+                  is first.
+                </Text>
+              </Stack>
+              <Alert variant="orange">
+                <Stack>
+                  <Text fontWeight="bold">How to claim ownership:</Text>
+                  <OrderedList
+                    stylePosition="outside"
+                    marginStart={6}
+                    spacing={2}
+                  >
+                    <ListItem>
+                      <Stack>
+                        <Text>Save File</Text>
+                        <Button
+                          whiteSpace="nowrap"
+                          variant="orange"
+                          size={["sm", null, "md"]}
+                          w="fit-content"
+                          disabled={nameData.state === "loading"}
+                          onClick={handleDownload}
+                        >
+                          Download your face
+                        </Button>
+                      </Stack>
+                    </ListItem>
+                    <ListItem>
+                      <Stack>
+                        <Text>Inscribe</Text>
+                        <Text>
+                          Go to{" "}
+                          <ChakraLink isExternal href="https://ordinalsbot.com">
+                            ordinalsbot.com
+                          </ChakraLink>
+                          , upload your face and inscribe!
+                        </Text>
+                      </Stack>
+                    </ListItem>
+                  </OrderedList>
+                </Stack>
+              </Alert>
             </Stack>
           </ModalBody>
           <ModalFooter>
