@@ -2,10 +2,10 @@ import {
   Alert,
   Box,
   Button,
-  ButtonGroup,
   FormControl,
   Input,
   Heading,
+  Link as ChakraLink,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,10 +16,9 @@ import {
   Stack,
   Text,
   useDisclosure,
-  UnorderedList,
   ListItem,
-  Code,
   Skeleton,
+  OrderedList,
 } from "@chakra-ui/react";
 import { useAtom, useAtomValue } from "jotai";
 import { loadable } from "jotai/utils";
@@ -103,7 +102,7 @@ function LandingForm() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading>Save your Face</Heading>
+            <Heading>Claim your Bitcoin Face.</Heading>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -129,54 +128,64 @@ function LandingForm() {
                   )}
                 </Skeleton>
               </Box>
-              <Text>
-                Selected Name:{" "}
+              <Text alignSelf="flex-start">
+                Congrats! You've generated the Bitcoin Face for{" "}
                 <Box as="span" fontWeight="bold">
                   {name}
                 </Box>
               </Text>
+              <Text alignSelf="flex-start">
+                The first person to inscribe each face claims ownership. First
+                is first.
+              </Text>
               <Alert variant="orange">
                 <Stack>
-                  <Text>Inscribe your image to save your face.</Text>
-                  <Text>You can copy the code or download it.</Text>
-                  <Text>
-                    The correct mime-type is{" "}
-                    <Code style={{ backgroundColor: "#fff7eb" }}>
-                      image/svg+xml
-                    </Code>
-                  </Text>
-                  <Text>Upload to an inscription service like:</Text>
-                  <UnorderedList>
-                    <ListItem>Ordinals Bot</ListItem>
-                    <ListItem>Unisat</ListItem>
-                    <ListItem>OrdSwap</ListItem>
-                    <ListItem>could find more</ListItem>
-                    <ListItem>could link awesome list</ListItem>
-                  </UnorderedList>
+                  <Text fontWeight="bold">How to claim ownership:</Text>
+                  <OrderedList spacing={2}>
+                    <ListItem>
+                      <Stack>
+                        <Text>Save File</Text>
+                        <Button
+                          whiteSpace="nowrap"
+                          variant="orange"
+                          size={["sm", null, "md"]}
+                          w="fit-content"
+                          onClick={() => copyText(name)}
+                        >
+                          Download your face
+                        </Button>
+                      </Stack>
+                    </ListItem>
+                    <ListItem>
+                      <Stack>
+                        <Text>Inscribe</Text>
+                        <Text>
+                          Go to{" "}
+                          <ChakraLink isExternal href="https://ordinalsbot.com">
+                            ordinalsbot.com
+                          </ChakraLink>
+                          , upload your face and inscribe!
+                        </Text>
+                      </Stack>
+                    </ListItem>
+                    <ListItem>
+                      <Stack>
+                        <Text>Share on X</Text>
+                        <Text>
+                          Post a picture of your newly owned Bitcoin Face and
+                          tag @bitcoinfaces
+                        </Text>
+                      </Stack>
+                    </ListItem>
+                  </OrderedList>
                 </Stack>
               </Alert>
             </Stack>
           </ModalBody>
           <ModalFooter>
-            <ButtonGroup size={["sm", null, "md"]}>
-              <Button
-                whiteSpace="nowrap"
-                variant="orange"
-                onClick={() => copyText(name)}
-              >
-                Save to File
-              </Button>
-              <Button
-                whiteSpace="nowrap"
-                variant="orange"
-                onClick={() => copyText(name)}
-              >
-                Copy Code to Clipboard
-              </Button>
-              <Button variant="orange" onClick={onClose} borderRadius="lg">
-                Close
-              </Button>
-            </ButtonGroup>
+            <Button onClick={onClose} borderRadius="lg">
+              Close
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
