@@ -171,7 +171,7 @@ function LandingForm() {
                   title="Share on X (Twitter)"
                   icon={<FaTwitter />}
                   as="a"
-                  href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fbitcoinfaces.xyz&text=I%20put%20a%20Bitcoin%20Face%20to%20my%20name"
+                  href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
                   target="_blank"
                   rel="noopener noreferrer"
                 />
