@@ -80,7 +80,7 @@ const inputStyles = {
         borderColor: "#FF9300",
       },
       "::placeholder": {
-        color: "--gray-300",
+        color: "gray.300",
       },
     },
     _hover: {
@@ -92,12 +92,28 @@ const inputStyles = {
   },
 };
 
+const alertStyles = {
+  variants: {
+    orange: {
+      container: {
+        background: "#fff7eb",
+        border: "1px solid",
+        borderColor: "#FF9300",
+      },
+      title: {
+        color: "white",
+      },
+    },
+  },
+};
+
 // Export the component theme
 export const tabsTheme = defineMultiStyleConfig({ baseStyle: tabsBaseStyle });
 
 const theme = extendTheme({
   config,
   components: {
+    Alert: alertStyles,
     Button: buttonStyles,
     Input: inputStyles,
     Link: linkStyles,
