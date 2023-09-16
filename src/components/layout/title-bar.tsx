@@ -1,22 +1,16 @@
-import {
-  ButtonGroup,
-  Flex,
-  Heading,
-  IconButton,
-  Stack,
-} from "@chakra-ui/react";
+import { ButtonGroup, IconButton, Stack } from "@chakra-ui/react";
 import { FaBook, FaTwitter } from "react-icons/fa";
-import BitcoinFaceLogo from "./bitcoin-face-174-logo";
 
 function TitleBar() {
   return (
-    <Stack align="center" direction="row" width="100%" maxW={1600} py={2}>
-      <Flex flexGrow="1" align="center">
-        <BitcoinFaceLogo width="45px" height="45px" />
-        <Heading size="md" ml={2}>
-          Bitcoin Faces
-        </Heading>
-      </Flex>
+    <Stack
+      align="flex-end"
+      justifyContent="flex-end"
+      direction="row"
+      width="100%"
+      maxW={1600}
+      py={2}
+    >
       <ButtonGroup>
         <IconButton
           aria-label="API Documentation"
