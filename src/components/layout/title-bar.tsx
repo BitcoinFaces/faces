@@ -1,5 +1,6 @@
 import { ButtonGroup, IconButton, Stack } from "@chakra-ui/react";
-import { FaBook, FaTwitter } from "react-icons/fa";
+import { FaBook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 function TitleBar() {
   return (
@@ -26,7 +27,7 @@ function TitleBar() {
           aria-label="Twitter"
           title="Twitter"
           variant="ghost"
-          icon={<FaTwitter />}
+          icon={<FaXTwitter />}
           as="a"
           href="https://twitter.com/bitcoinfaces"
           target="_blank"

@@ -29,7 +29,8 @@ import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
 import { FACES_COMPONENTS, nameDataAtom } from "../../store/faces";
-import { FaCode, FaDownload, FaTwitter } from "react-icons/fa";
+import { FaCode, FaDownload } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 function LandingForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -168,7 +169,7 @@ function LandingForm() {
                   <IconButton
                     aria-label="Share on X (Twitter)"
                     title="Share on X (Twitter)"
-                    icon={<FaTwitter />}
+                    icon={<FaXTwitter />}
                     as="a"
                     href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
                     target="_blank"
