@@ -1,5 +1,4 @@
 import {
-  Alert,
   Box,
   Button,
   FormControl,
@@ -19,27 +18,45 @@ import {
   ListItem,
   Skeleton,
   OrderedList,
+  ButtonGroup,
+  IconButton,
 } from "@chakra-ui/react";
+
 import { useAtom, useAtomValue } from "jotai";
 import { loadable } from "jotai/utils";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
-import { FACES_COMPONENTS, svgCodeAtom } from "../../store/faces";
+import { FACES_COMPONENTS, nameDataAtom } from "../../store/faces";
+import { FaCode, FaDownload, FaTwitter } from "react-icons/fa";
 
 function LandingForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const copyText = useClipboardToast();
   const [name, setName] = useAtom(selectedNameAtom);
-  const loadNameSvgCode = loadable(svgCodeAtom);
-  const nameSvgCode = useAtomValue(loadNameSvgCode);
+  const loadNameData = loadable(nameDataAtom);
+  const nameData = useAtomValue(loadNameData);
 
   // form submission handler
   const handleSubmit = () => {
-    console.log("provided name:", name);
     if (!name) return;
     setName(name);
     onOpen();
+  };
+
+  const handleDownload = () => {
+    if (nameData.state === "hasData" && nameData.data) {
+      const svgBlob = new Blob([nameData.data.svgCode.onchain], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const svgUrl = URL.createObjectURL(svgBlob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = svgUrl;
+      downloadLink.download = `${name}.svg`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
   };
 
   const Face = FACES_COMPONENTS[25];
@@ -109,25 +126,56 @@ function LandingForm() {
             <Stack direction="column" spacing={2}>
               <Box
                 borderRadius="lg"
+                alignSelf="center"
                 style={{
                   overflow: "hidden",
                 }}
               >
-                <Skeleton isLoaded={nameSvgCode.state !== "loading"}>
-                  {nameSvgCode.state === "hasData" ? (
+                <Skeleton isLoaded={nameData.state !== "loading"}>
+                  {nameData.state === "hasData" && nameData.data ? (
                     <Box
-                      width="100%"
-                      maxW="200px"
-                      maxH="200px"
+                      width="200px"
+                      height="200px"
                       transform="scale(0.4)"
                       transformOrigin="top left"
-                      dangerouslySetInnerHTML={{ __html: nameSvgCode.data }}
+                      dangerouslySetInnerHTML={{
+                        __html: nameData.data.svgCode.local,
+                      }}
                     />
                   ) : (
                     <Face width="200" height="200" />
                   )}
                 </Skeleton>
               </Box>
+              <ButtonGroup alignSelf="center" size="lg">
+                <IconButton
+                  aria-label="Download Bitcoin Face"
+                  title="Download Bitcoin Face"
+                  icon={<FaDownload />}
+                  disabled={nameData.state === "loading"}
+                  onClick={handleDownload}
+                />
+                <IconButton
+                  aria-label="Copy Source Code"
+                  title="Copy Source Code"
+                  icon={<FaCode />}
+                  disabled={nameData.state === "loading"}
+                  onClick={() => {
+                    if (nameData.state === "hasData" && nameData.data) {
+                      copyText(nameData.data.svgCode.onchain);
+                    }
+                  }}
+                />
+                <IconButton
+                  aria-label="Share on X (Twitter)"
+                  title="Share on X (Twitter)"
+                  icon={<FaTwitter />}
+                  as="a"
+                  href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fbitcoinfaces.xyz&text=I%20put%20a%20Bitcoin%20Face%20to%20my%20name"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              </ButtonGroup>
               <Text>
                 Congrats! You've generated the Bitcoin Face for{" "}
                 <Box as="span" fontWeight="bold">
@@ -153,7 +201,8 @@ function LandingForm() {
                         variant="orange"
                         size={["sm", null, "md"]}
                         w="fit-content"
-                        onClick={() => copyText(name)}
+                        disabled={nameData.state === "loading"}
+                        onClick={handleDownload}
                       >
                         Download your face
                       </Button>

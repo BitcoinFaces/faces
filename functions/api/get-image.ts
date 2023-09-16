@@ -1,9 +1,9 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { createHashArray } from "../../src/store/common";
 import {
-  createLayers,
-  createSvgFile,
-  selectLayers,
+  createLayersFromSelection,
+  createSvgFileFromLayers,
+  selectLayersFromHash,
 } from "../../src/store/faces";
 
 export async function onRequest(
@@ -23,11 +23,11 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const selectedLayers = selectLayers(hashArray, onchain);
+    const selectedLayers = selectLayersFromHash(hashArray, onchain);
     // create svg layers from selected layers
-    const svgLayers = createLayers(selectedLayers, onchain, host);
+    const svgLayers = createLayersFromSelection(selectedLayers, onchain, host);
     // create svg file from svg layers
-    const svgFile = createSvgFile(name, svgLayers);
+    const svgFile = createSvgFileFromLayers(name, svgLayers);
     // return svg code as svg image
     return new Response(svgFile, {
       headers: { "Content-Type": "image/svg+xml" },

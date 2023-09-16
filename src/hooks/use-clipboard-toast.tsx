@@ -19,9 +19,12 @@ export const useClipboardToast = () => {
     }
     const copyStatus = copy(text);
     if (copyStatus) {
+      // if text is longer than 100 chars, truncate it
+      const truncatedText =
+        text.length > 100 ? `${text.slice(0, 100)}...` : text;
       toast({
         title: `Copied text to clipboard`,
-        description: text,
+        description: truncatedText,
         position: "top",
         status: "success",
         variant: "solid",

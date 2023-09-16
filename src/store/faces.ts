@@ -361,6 +361,27 @@ export type LayerSelection = {
   [key: string]: string | undefined;
 };
 
+export type LayerCode = {
+  [key: string]: string;
+};
+
+export type NameData =
+  | {
+      name: string;
+      hashArray: number[];
+      layersSelection: NameDataCode<LayerSelection>;
+      layersSelectionList: string[];
+      layersCode: NameDataCode<LayerCode>;
+      svgCodeLayers: NameDataCode<string>;
+      svgCode: NameDataCode<string>;
+    }
+  | undefined;
+
+export type NameDataCode<T> = {
+  local: T;
+  onchain: T;
+};
+
 export type BitcoinFaceLogoProps = {
   width: string;
   height: string;
@@ -370,21 +391,45 @@ export type BitcoinFaceLogoProps = {
 // DERIVED ATOMS
 /////////////////////////
 
-export const svgCodeAtom = atom(async (get) => {
+// nameDataAtom
+export const nameDataAtom = atom(async (get): Promise<NameData> => {
   const name = get(selectedNameAtom);
-  if (!name) return "";
+  if (!name) return undefined;
   const hashArray = await createHashArray(name);
-  const selectedLayers = selectLayers(hashArray);
-  const svgLayers = createLayers(selectedLayers);
-  const svgCode = createSvgFile(name, svgLayers);
-  return svgCode;
+  const layersSelection: NameDataCode<LayerSelection> = {
+    local: selectLayersFromHash(hashArray, false),
+    onchain: selectLayersFromHash(hashArray, true),
+  };
+  const layersSelectionList = listLayersFromHash(hashArray);
+  const layersCode: NameDataCode<LayerCode> = {
+    local: getLayersFromSelection(layersSelection.local, false),
+    onchain: getLayersFromSelection(layersSelection.onchain, true),
+  };
+  const svgCodeLayers: NameDataCode<string> = {
+    local: createLayersFromSelection(layersSelection.local, false),
+    onchain: createLayersFromSelection(layersSelection.onchain, true),
+  };
+  const svgCode: NameDataCode<string> = {
+    local: createSvgFileFromLayers(name, svgCodeLayers.local),
+    onchain: createSvgFileFromLayers(name, svgCodeLayers.onchain),
+  };
+  return {
+    name,
+    hashArray,
+    layersSelection,
+    layersSelectionList,
+    layersCode,
+    svgCodeLayers,
+    svgCode,
+  };
 });
 
 /////////////////////////
 // HELPER FUNCTIONS
 /////////////////////////
 
-export function selectLayers(hashArray: number[], onchain = false) {
+// takes hash array and returns code for selected layers
+export function selectLayersFromHash(hashArray: number[], onchain = false) {
   const selectedLayers: LayerSelection = {};
   let hashIndex = 0;
   for (const [key, value] of Object.entries(
@@ -398,7 +443,8 @@ export function selectLayers(hashArray: number[], onchain = false) {
   return selectedLayers;
 }
 
-export function listLayers(hashArray: number[], onchain = false) {
+// takes hash array and returns list of selected layers by key name
+export function listLayersFromHash(hashArray: number[], onchain = false) {
   const listedLayers: string[] = [];
   let hashIndex = 0;
   for (const [key, value] of Object.entries(
@@ -411,7 +457,7 @@ export function listLayers(hashArray: number[], onchain = false) {
   return listedLayers;
 }
 
-export function getLayers(
+export function getLayersFromSelection(
   layers: LayerSelection,
   onchain = false,
   host = "/content"
@@ -431,7 +477,7 @@ export function getLayers(
   return result;
 }
 
-export function createLayers(
+export function createLayersFromSelection(
   layers: LayerSelection,
   onchain = false,
   host = "/content"
@@ -451,7 +497,7 @@ export function createLayers(
     .join("\n");
 }
 
-export function createSvgFile(
+export function createSvgFileFromLayers(
   name: string,
   svgLayers: string,
   width = 500,

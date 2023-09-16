@@ -1,6 +1,9 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { createHashArray } from "../../src/store/common";
-import { getLayers, selectLayers } from "../../src/store/faces";
+import {
+  getLayersFromSelection,
+  selectLayersFromHash,
+} from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -19,9 +22,9 @@ export async function onRequest(
     // create a hash array from the input string
     const hashArray = await createHashArray(name);
     // determine layer selections
-    const selectedLayers = selectLayers(hashArray, onchain);
+    const selectedLayers = selectLayersFromHash(hashArray, onchain);
     // create svg layers from selected layers
-    const svgLayers = getLayers(selectedLayers, onchain, host);
+    const svgLayers = getLayersFromSelection(selectedLayers, onchain, host);
     // return selected layers
     return new Response(JSON.stringify(svgLayers, null, 2), {
       status: 200,
