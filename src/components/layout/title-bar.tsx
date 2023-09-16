@@ -18,7 +18,7 @@ function TitleBar() {
           variant="ghost"
           icon={<FaBook />}
           as="a"
-          href="https://bitcoinfaces.xyz/api/docs"
+          href="https://bitcoinfaces.xyz/api-docs"
           target="_blank"
           rel="noopener noreferrer"
         />

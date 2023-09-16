@@ -3,7 +3,7 @@ import theme from "./theme";
 import CustomFonts from "./components/layout/custom-fonts";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./routes/home";
-import Docs from "./routes/docs";
+import ApiDocs from "./routes/api-docs";
 import PageNotFound from "./routes/page-not-found";
 
 const router = createBrowserRouter([
@@ -14,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/docs",
-    element: <Docs />,
+    element: <ApiDocs />,
+  },
+  {
+    path: "/api-docs",
+    element: <ApiDocs />,
   },
 ]);
 
