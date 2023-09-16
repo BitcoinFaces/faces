@@ -469,7 +469,7 @@ export function getLayersFromSelection(
       if (onchain) {
         result[key] = `<image id="${key}-${
           index + 1
-        }" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
+        }" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
       } else {
         result[key] = value as string;
       }
@@ -489,7 +489,7 @@ export function createLayersFromSelection(
         // return a link to the on-chain image hash
         return `<image id="${key}-${
           index + 1
-        }" xlink:href="${host}/${value}" x="0" y="0" width="500" height="500"></image>`;
+        }" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
       }
       // return the matching layer in the cache
       return value;
@@ -500,8 +500,8 @@ export function createLayersFromSelection(
 export function createSvgFileFromLayers(
   name: string,
   svgLayers: string,
-  width = 500,
-  height = 500
+  width = "100%",
+  height = "100%"
 ) {
   // TODO: add flag for laser eyes, add defs
   return `<svg id="Bitcoin Face for ${name}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;

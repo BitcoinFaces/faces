@@ -126,29 +126,26 @@ function LandingForm() {
           <ModalBody>
             <Stack direction="column" spacing={4}>
               <Stack>
-                <Box
-                  borderRadius="lg"
-                  alignSelf="center"
-                  style={{
-                    overflow: "hidden",
-                  }}
-                >
-                  <Skeleton isLoaded={nameData.state !== "loading"}>
+                <Skeleton isLoaded={nameData.state !== "loading"}>
+                  <Box
+                    borderRadius="lg"
+                    alignSelf="center"
+                    boxSize={[200, null, 300]}
+                    m="auto"
+                  >
                     {nameData.state === "hasData" && nameData.data ? (
                       <Box
-                        width="200px"
-                        height="200px"
-                        transform="scale(0.4)"
-                        transformOrigin="top left"
+                        h="100%"
+                        w="100%"
                         dangerouslySetInnerHTML={{
                           __html: nameData.data.svgCode.local,
                         }}
                       />
                     ) : (
-                      <Face width="200" height="200" />
+                      <Face width="100%" height="100%" />
                     )}
-                  </Skeleton>
-                </Box>
+                  </Box>
+                </Skeleton>
                 <ButtonGroup alignSelf="center" size="lg">
                   <IconButton
                     aria-label="Download Bitcoin Face"
