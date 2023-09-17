@@ -2,11 +2,11 @@ import { ButtonGroup, IconButton, Stack } from "@chakra-ui/react";
 import { FaBook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-function TitleBar() {
+function TitleBar(props: { align: "flex-start" | "center" | "flex-end" }) {
   return (
     <Stack
-      align="flex-end"
-      justifyContent="flex-end"
+      align={props.align}
+      justifyContent={props.align}
       direction="row"
       width="100%"
       maxW={1600}

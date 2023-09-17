@@ -31,7 +31,7 @@ function Home() {
 
   return (
     <Flex direction="column" minH="100vh" alignItems="center" p={2}>
-      <TitleBar />
+      <TitleBar align="flex-start" />
       <SimpleGrid
         gap={2}
         templateColumns={`repeat(${columns}, ${size}px)`}
@@ -55,7 +55,7 @@ function Home() {
           <LandingForm />
         </Box>
       </SimpleGrid>
-      <TitleBar />
+      <TitleBar align="center" />
     </Flex>
   );
 }
