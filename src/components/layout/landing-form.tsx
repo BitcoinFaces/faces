@@ -86,7 +86,7 @@ function LandingForm() {
         <FormControl id="name" width={["100%", null, "50%"]} isRequired>
           <Input
             type="text"
-            placeholder="E.g. satoshi.sats"
+            placeholder="E.g. satoshi"
             fontSize="xl"
             py={6}
             onChange={(e) => setName(e.target.value)}
