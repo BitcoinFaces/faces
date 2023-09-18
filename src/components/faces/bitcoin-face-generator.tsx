@@ -7,20 +7,21 @@ const BitcoinFaceGenerator = (
   props: BitcoinFaceLogoProps & { name: string }
 ) => {
   const nameDataAtom = nameDataAtomFamily(props.name);
-  //const loadNameData = loadable(nameDataAtom);
-  //const nameData = useAtomValue(loadNameData);
-  const nameData = { state: "loading", data: undefined };
+  const loadNameData = loadable(nameDataAtom);
+  const nameData = useAtomValue(loadNameData);
 
   return (
-    <Skeleton isLoaded={nameData.state !== "loading"}>
-      {nameData.state === "hasData" && nameData.data && (
+    <Skeleton isLoaded={nameData.state !== "loading"} fadeDuration={0}>
+      {nameData.state === "hasData" && nameData.data ? (
         <Box
           h={props.height}
           w={props.width}
           dangerouslySetInnerHTML={{
-            __html: "", // nameData.data.svgCode.local,
+            __html: nameData.data.svgCode.local,
           }}
         />
+      ) : (
+        <Box h={props.height} w={props.width} />
       )}
     </Skeleton>
   );

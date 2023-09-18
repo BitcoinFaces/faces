@@ -22,198 +22,198 @@ import { atomFamily } from "jotai/utils";
 /////////////////////////
 
 export const FACES_COMPONENTS = [
-  Faces.BitcoinFace82,
-  Faces.BitcoinFace118,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "image 8",
-  }),
-  Faces.BitcoinFace107,
-  Faces.BitcoinFace428,
-  Faces.BitcoinFace532,
-  Faces.BitcoinFace292,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "Group",
-  }),
-  Faces.BitcoinFace443,
-  Faces.BitcoinFace568,
-  Faces.BitcoinFace521,
-  Faces.BitcoinFace142,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "image 7",
-  }),
-  Faces.BitcoinFace613,
-  Faces.BitcoinFace581,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "image 1",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "image 27",
-  }),
-  Faces.BitcoinFace675,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "bitcoin-face-85",
-  }),
-  Faces.BitcoinFace517,
-  Faces.BitcoinFace522,
-  Faces.BitcoinFace287,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "Group",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "Group",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "11",
-  }),
-  Faces.BitcoinFace308,
-  Faces.BitcoinFace298,
-  Faces.BitcoinFace135,
-  Faces.BitcoinFace515,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "30",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "13",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "16",
-  }),
-  Faces.BitcoinFace425,
-  Faces.BitcoinFace584,
-  Faces.BitcoinFace608,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "26",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "14",
-  }),
-  Faces.BitcoinFace586,
-  Faces.BitcoinFace109,
-  Faces.BitcoinFace230,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "22",
-  }),
-  Faces.BitcoinFace672,
-  Faces.BitcoinFace525,
-  Faces.BitcoinFace547,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "2",
-  }),
-  Faces.BitcoinFace112,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "24",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "4",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "23",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "group-1",
-  }),
-  Faces.BitcoinFace209,
-  Faces.BitcoinFace476,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "21",
-  }),
-  Faces.BitcoinFace160,
-  Faces.BitcoinFace614,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "group-2",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "25",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "6",
-  }),
-  Faces.BitcoinFace593,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "31",
-  }),
-  Faces.BitcoinFace115,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "29",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "5",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "19",
-  }),
-  Faces.BitcoinFace105,
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "18",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "group-3",
-  }),
-  Faces.BitcoinFaceGenerator({
-    width: "100%",
-    height: "100%",
-    name: "9",
-  }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace82({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace118({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-123",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace107({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace428({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace532({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace292({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-2049-2",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace443({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace568({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace521({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace142({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-3",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace613({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace581({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-4",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-555",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace675({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-666",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace517({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace522({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace287({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-7",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-8000",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-9000",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace308({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace298({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace135({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace515({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-10",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-112",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Forever-12",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace425({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace584({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace608({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-135",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-14",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace586({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace109({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace230({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-151",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace672({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace525({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace547({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-16",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace112({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-150",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-17-2",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-1800",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-19",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace209({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace476({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-20",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace160({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace614({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-21",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-22-by-22",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-23",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace593({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-24",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace115({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-25",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-26",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-27",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace105({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-wtfbbq",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-290",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-300",
+    }),
 ];
 
 /* UNUSED FACES
@@ -249,6 +249,8 @@ export type BitcoinFaceLogoProps = {
   width: string;
   height: string;
 };
+
+export type BitcoinFaceGeneratorProps = BitcoinFaceLogoProps & { name: string };
 
 /////////////////////////
 // DERIVED ATOMS
