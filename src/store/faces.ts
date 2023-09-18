@@ -114,7 +114,7 @@ export type BitcoinFaceLogoProps = {
 /////////////////////////
 
 // nameDataAtom
-export const nameDataAtom = atom(async (get): Promise<NameData> => {
+export const nameDataAtom = atom(async (get): Promise<NameData | undefined> => {
   const name = get(selectedNameAtom);
   if (!name) return undefined;
   const hashArray = await createHashArray(name);
@@ -245,63 +245,64 @@ export function selectLayersFromHash(hashArray: number[], onchain = false) {
 
       hashIndex++;
     }
-    return selectedLayers;
   }
+
+  return selectedLayers;
 }
-  // takes hash array and returns list of selected layers by key name
-  export function listLayersFromHash(hashArray: number[], onchain = false) {
-    const listedLayers: string[] = [];
-    let hashIndex = 0;
-    const attributes: LayerAttributes = onchain
-      ? INSCRIBED_ATTRIBUTES
-      : LOCAL_ATTRIBUTES;
 
-    for (const [key, value] of Object.entries(attributes)) {
-      const index = hashArray[hashIndex % hashArray.length];
+// takes hash array and returns list of selected layers by key name
+export function listLayersFromHash(hashArray: number[], onchain = false) {
+  const listedLayers: string[] = [];
+  let hashIndex = 0;
+  const attributes: LayerAttributes = onchain
+    ? INSCRIBED_ATTRIBUTES
+    : LOCAL_ATTRIBUTES;
 
-      // handle 'eyes' separately
-      if (key === "eyes") {
-        const eyeAttributes = value as EyeAttributes;
-        const eyeProb = index % 100;
-        let eyeType: EyeTypes;
-        if (eyeProb < 50) {
-          eyeType = "normal";
+  for (const [key, value] of Object.entries(attributes)) {
+    const index = hashArray[hashIndex % hashArray.length];
+
+    // handle 'eyes' separately
+    if (key === "eyes") {
+      const eyeAttributes = value as EyeAttributes;
+      const eyeProb = index % 100;
+      let eyeType: EyeTypes;
+      if (eyeProb < 50) {
+        eyeType = "normal";
+      } else {
+        const laserProb = (eyeProb - 50) % 50;
+        if (laserProb < 20) {
+          eyeType = "starburst";
         } else {
-          const laserProb = (eyeProb - 50) % 50;
-          if (laserProb < 20) {
-            eyeType = "starburst";
-          } else {
-            eyeType = "laser";
-          }
-        }
-        const eyeIndex =
-          hashArray[(hashIndex + 1) % hashArray.length] %
-          eyeAttributes[eyeType].length;
-        listedLayers.push(`${key}-${eyeType}-${eyeIndex + 1}`);
-      }
-      // handle optional layers
-      else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
-        const randomValue = index % 100; // based on index
-        if (
-          (key === "chain" && randomValue < CHANCE_CHAIN) ||
-          (key === "earring" && randomValue < CHANCE_EARRING) ||
-          (key === "glasses" && randomValue < CHANCE_GLASSES) ||
-          (key === "hat" && randomValue < CHANCE_HAT)
-        ) {
-          const layerIndex = index % (value as string[]).length;
-          listedLayers.push(`${key}-${layerIndex + 1}`);
+          eyeType = "laser";
         }
       }
-      // handle required layers (other than 'eyes')
-      else {
-        listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
+      const eyeIndex =
+        hashArray[(hashIndex + 1) % hashArray.length] %
+        eyeAttributes[eyeType].length;
+      listedLayers.push(`${key}-${eyeType}-${eyeIndex + 1}`);
+    }
+    // handle optional layers
+    else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
+      const randomValue = index % 100; // based on index
+      if (
+        (key === "chain" && randomValue < CHANCE_CHAIN) ||
+        (key === "earring" && randomValue < CHANCE_EARRING) ||
+        (key === "glasses" && randomValue < CHANCE_GLASSES) ||
+        (key === "hat" && randomValue < CHANCE_HAT)
+      ) {
+        const layerIndex = index % (value as string[]).length;
+        listedLayers.push(`${key}-${layerIndex + 1}`);
       }
-
-      hashIndex++;
+    }
+    // handle required layers (other than 'eyes')
+    else {
+      listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
     }
 
-    return listedLayers;
+    hashIndex++;
   }
+
+  return listedLayers;
 }
 
 export function getLayersFromSelection(
@@ -309,18 +310,22 @@ export function getLayersFromSelection(
   onchain = false,
   host = "/content"
 ) {
-  const result: { [key: string]: string } = {};
+  const result: LayerCode = Object.fromEntries(
+    Object.keys(layers).map((key) => [key, ""])
+  ) as LayerCode;
+
   Object.entries(layers)
     .filter(([key, value]) => value !== undefined)
     .forEach(([key, value], index) => {
       if (onchain) {
-        result[key] = `<image id="${key}-${
+        result[key as Layers] = `<image id="${key}-${
           index + 1
         }" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
       } else {
-        result[key] = value as string;
+        result[key as Layers] = value as string;
       }
     });
+
   return result;
 }
 
