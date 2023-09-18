@@ -43,6 +43,7 @@ import {
   Layers,
   OPTIONAL_LAYERS,
   OptionalLayers,
+  REQUIRED_LAYERS,
 } from "./attributes";
 
 /////////////////////////
@@ -236,15 +237,15 @@ export function selectLayersFromHash(hashArray: number[], onchain = false) {
       if (layer) {
         selectedLayers[key as Layers] = layer;
       }
-      // handle required layers (other than 'eyes')
-      else {
-        selectedLayers[key as Layers] = (value as string[])[
-          index % (value as string[]).length
-        ];
-      }
-
-      hashIndex++;
     }
+    // handle required layers (other than 'eyes')
+    else {
+      selectedLayers[key as Layers] = (value as string[])[
+        index % (value as string[]).length
+      ];
+    }
+
+    hashIndex++;
   }
 
   return selectedLayers;

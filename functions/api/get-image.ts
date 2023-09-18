@@ -28,6 +28,7 @@ export async function onRequest(
     const svgLayers = createLayersFromSelection(selectedLayers, onchain, host);
     // create svg file from svg layers
     const svgFile = createSvgFileFromLayers(name, svgLayers);
+
     // return svg code as svg image
     return new Response(svgFile, {
       headers: { "Content-Type": "image/svg+xml" },
