@@ -86,30 +86,23 @@ export const FACES_COMPONENTS = [
 // TYPES
 /////////////////////////
 
-export type LayerSelection = {
-  [key: string]: string | undefined;
-};
+type LayerSelection = Record<Layers, string | undefined>;
+type LayerCode = Record<Layers, string>;
 
-export type LayerCode = {
-  [key: string]: string;
-};
+export interface NameData {
+  name: string;
+  hashArray: number[];
+  layersSelection: NameDataCode<LayerSelection>;
+  layersSelectionList: string[];
+  layersCode: NameDataCode<LayerCode>;
+  svgCodeLayers: NameDataCode<string>;
+  svgCode: NameDataCode<string>;
+}
 
-export type NameData =
-  | {
-      name: string;
-      hashArray: number[];
-      layersSelection: NameDataCode<LayerSelection>;
-      layersSelectionList: string[];
-      layersCode: NameDataCode<LayerCode>;
-      svgCodeLayers: NameDataCode<string>;
-      svgCode: NameDataCode<string>;
-    }
-  | undefined;
-
-export type NameDataCode<T> = {
+interface NameDataCode<T> {
   local: T;
   onchain: T;
-};
+}
 
 export type BitcoinFaceLogoProps = {
   width: string;
@@ -157,6 +150,53 @@ export const nameDataAtom = atom(async (get): Promise<NameData> => {
 // HELPER FUNCTIONS
 /////////////////////////
 
+// calculates the eye type
+function calculateEyeType(hashArray: number[], hashIndex: number): EyeTypes {
+  const eyeProb = hashArray[hashIndex % hashArray.length] % 100;
+  if (eyeProb < 50) {
+    return "normal";
+  } else {
+    const laserProb = (eyeProb - 50) % 50;
+    if (laserProb < 20) {
+      return "starburst";
+    } else {
+      return "laser";
+    }
+  }
+}
+
+// calculates layer index
+function calculateLayerIndex(
+  hashArray: number[],
+  hashIndex: number,
+  length: number
+): number {
+  return hashArray[hashIndex % hashArray.length] % length;
+}
+
+// handles optional layers
+function handleOptionalLayer(
+  key: string,
+  value: any,
+  hashArray: number[],
+  hashIndex: number
+): string | undefined {
+  const randomValue = hashArray[hashIndex % hashArray.length] % 100;
+  const chance = {
+    chain: CHANCE_CHAIN,
+    earring: CHANCE_EARRING,
+    glasses: CHANCE_GLASSES,
+    hat: CHANCE_HAT,
+  }[key];
+
+  if (chance && randomValue < chance) {
+    const layerIndex = calculateLayerIndex(hashArray, hashIndex, value.length);
+    return `${key}-${layerIndex + 1}`;
+  }
+
+  return undefined;
+}
+
 // takes hash array and returns code for selected layers
 export function selectLayersFromHash(hashArray: number[], onchain = false) {
   const selectedLayers: Record<Layers, string | undefined> = {
@@ -184,99 +224,84 @@ export function selectLayersFromHash(hashArray: number[], onchain = false) {
     // handle 'eyes' separately
     if (key === "eyes") {
       const eyeAttributes = value as EyeAttributes;
-      const eyeProb = index % 100;
-      let eyeType: EyeTypes;
-      if (eyeProb < 50) {
-        eyeType = "normal";
-      } else if (eyeProb < 90) {
-        eyeType = "laser";
-      } else {
-        eyeType = "starburst";
-      }
+      const eyeType = calculateEyeType(hashArray, hashIndex);
       const eyeIndex =
         hashArray[(hashIndex + 1) % hashArray.length] %
         eyeAttributes[eyeType].length;
       selectedLayers[key] = eyeAttributes[eyeType][eyeIndex];
     }
     // handle optional layers
-    else if (["chain", "earring", "glasses", "hat"].includes(key)) {
-      const randomValue = pseudoRandom(hashArray, hashIndex);
-      if (
-        (key === "chain" && randomValue < 0.25) ||
-        (key === "earring" && randomValue < 0.25) ||
-        (key === "glasses" && randomValue < 0.5) ||
-        (key === "hat" && randomValue < 0.5)
-      ) {
-        selectedLayers[key] = (value as string[])[
+    else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
+      const layer = handleOptionalLayer(key, value, hashArray, hashIndex);
+      if (layer) {
+        selectedLayers[key as Layers] = layer;
+      }
+      // handle required layers (other than 'eyes')
+      else {
+        selectedLayers[key as Layers] = (value as string[])[
           index % (value as string[]).length
         ];
       }
-    }
-    // handle required layers (other than 'eyes')
-    else {
-      selectedLayers[key as Layers] = (value as string[])[
-        index % (value as string[]).length
-      ];
-    }
 
-    hashIndex++;
+      hashIndex++;
+    }
+    return selectedLayers;
   }
-  return selectedLayers;
 }
+  // takes hash array and returns list of selected layers by key name
+  export function listLayersFromHash(hashArray: number[], onchain = false) {
+    const listedLayers: string[] = [];
+    let hashIndex = 0;
+    const attributes: LayerAttributes = onchain
+      ? INSCRIBED_ATTRIBUTES
+      : LOCAL_ATTRIBUTES;
 
-// takes hash array and returns list of selected layers by key name
-export function listLayersFromHash(hashArray: number[], onchain = false) {
-  const listedLayers: string[] = [];
-  let hashIndex = 0;
-  const attributes: LayerAttributes = onchain
-    ? INSCRIBED_ATTRIBUTES
-    : LOCAL_ATTRIBUTES;
+    for (const [key, value] of Object.entries(attributes)) {
+      const index = hashArray[hashIndex % hashArray.length];
 
-  for (const [key, value] of Object.entries(attributes)) {
-    const index = hashArray[hashIndex % hashArray.length];
-
-    // handle 'eyes' separately
-    if (key === "eyes") {
-      const eyeAttributes = value as EyeAttributes;
-      const eyeProb = index % 100;
-      let eyeType: EyeTypes;
-      if (eyeProb < 50) {
-        eyeType = "normal";
-      } else {
-        const laserProb = (eyeProb - 50) % 50;
-        if (laserProb < 20) {
-          eyeType = "starburst";
+      // handle 'eyes' separately
+      if (key === "eyes") {
+        const eyeAttributes = value as EyeAttributes;
+        const eyeProb = index % 100;
+        let eyeType: EyeTypes;
+        if (eyeProb < 50) {
+          eyeType = "normal";
         } else {
-          eyeType = "laser";
+          const laserProb = (eyeProb - 50) % 50;
+          if (laserProb < 20) {
+            eyeType = "starburst";
+          } else {
+            eyeType = "laser";
+          }
+        }
+        const eyeIndex =
+          hashArray[(hashIndex + 1) % hashArray.length] %
+          eyeAttributes[eyeType].length;
+        listedLayers.push(`${key}-${eyeType}-${eyeIndex + 1}`);
+      }
+      // handle optional layers
+      else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
+        const randomValue = index % 100; // based on index
+        if (
+          (key === "chain" && randomValue < CHANCE_CHAIN) ||
+          (key === "earring" && randomValue < CHANCE_EARRING) ||
+          (key === "glasses" && randomValue < CHANCE_GLASSES) ||
+          (key === "hat" && randomValue < CHANCE_HAT)
+        ) {
+          const layerIndex = index % (value as string[]).length;
+          listedLayers.push(`${key}-${layerIndex + 1}`);
         }
       }
-      const eyeIndex =
-        hashArray[(hashIndex + 1) % hashArray.length] %
-        eyeAttributes[eyeType].length;
-      listedLayers.push(`${key}-${eyeType}-${eyeIndex + 1}`);
-    }
-    // handle optional layers
-    else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
-      const randomValue = index % 100; // based on index
-      if (
-        (key === "chain" && randomValue < CHANCE_CHAIN) ||
-        (key === "earring" && randomValue < CHANCE_EARRING) ||
-        (key === "glasses" && randomValue < CHANCE_GLASSES) ||
-        (key === "hat" && randomValue < CHANCE_HAT)
-      ) {
-        const layerIndex = index % (value as string[]).length;
-        listedLayers.push(`${key}-${layerIndex + 1}`);
+      // handle required layers (other than 'eyes')
+      else {
+        listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
       }
-    }
-    // handle required layers (other than 'eyes')
-    else {
-      listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
+
+      hashIndex++;
     }
 
-    hashIndex++;
+    return listedLayers;
   }
-
-  return listedLayers;
 }
 
 export function getLayersFromSelection(

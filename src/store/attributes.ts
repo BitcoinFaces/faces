@@ -41,7 +41,7 @@ export const REQUIRED_LAYERS = [
 export const OPTIONAL_LAYERS = ["chain", "earring", "glasses", "hat"] as const;
 export const EYE_TYPES = ["normal", "laser", "starburst"] as const;
 
-// chances
+// chances 0-100
 
 export const CHANCE_CHAIN = 25;
 export const CHANCE_EARRING = 25;
