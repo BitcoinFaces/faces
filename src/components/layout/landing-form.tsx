@@ -63,10 +63,11 @@ function LandingForm() {
 
   const Face = FACES_COMPONENTS[25];
 
-  // Upvote on Ord.io to launch
-
-  // Below logo:
-  // Every name has a Bitcoin Face. Claim yours first.
+  // AT LAUNCH:
+  // change below logo: Every name has a Bitcoin Face. Claim yours first.
+  // remove isDisabled from input
+  // remove isDisabled from button
+  // remove _disabled styles from button
 
   return (
     <Stack
