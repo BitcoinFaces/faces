@@ -15,12 +15,9 @@ import {
   Stack,
   Text,
   useDisclosure,
-  ListItem,
   Skeleton,
-  OrderedList,
   ButtonGroup,
   IconButton,
-  Alert,
 } from "@chakra-ui/react";
 
 import { useAtom, useAtomValue } from "jotai";
@@ -28,7 +25,7 @@ import { loadable } from "jotai/utils";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
-import { nameDataAtom } from "../../store/faces";
+import { GAMMA_CREATE_URL, nameDataAtom } from "../../store/faces";
 import { FaCode, FaDownload } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -61,12 +58,6 @@ function LandingForm() {
     }
   };
 
-  // AT LAUNCH:
-  // change below logo: Every name has a Bitcoin Face. Claim yours first.
-  // remove isDisabled from input
-  // remove isDisabled from button
-  // remove _disabled styles from button
-
   return (
     <Stack
       spacing={4}
@@ -84,15 +75,7 @@ function LandingForm() {
         fontWeight="bold"
         fontSize={["xl", null, "3xl", "4xl"]}
       >
-        Upvote on{" "}
-        <ChakraLink
-          isExternal
-          href="https://www.ord.io/33094029"
-          variant="orange-black"
-        >
-          Ord.io
-        </ChakraLink>{" "}
-        to launch
+        Every name has a Bitcoin Face. Claim yours first.
       </Text>
       <Stack
         direction={["column", null, "row"]}
@@ -103,11 +86,10 @@ function LandingForm() {
         <FormControl id="name" width={["100%", null, "50%"]} isRequired>
           <Input
             type="text"
-            placeholder="E.g. satoshi.sats"
+            placeholder="E.g. satoshi"
             fontSize="xl"
             py={6}
             onChange={(e) => setName(e.target.value)}
-            isDisabled
           />
         </FormControl>
         <Button
@@ -117,15 +99,8 @@ function LandingForm() {
           height="52px"
           width={["100%", null, "50%"]}
           onClick={handleSubmit}
-          isDisabled
-          _disabled={{
-            _hover: {
-              cursor: "not-allowed",
-              backgroundColor: "orange.300",
-            },
-          }}
         >
-          Coming soon
+          Claim now
         </Button>
       </Stack>
       <Modal
@@ -207,44 +182,20 @@ function LandingForm() {
                   is first.
                 </Text>
               </Stack>
-              <Alert variant="orange">
-                <Stack>
-                  <Text fontWeight="bold">How to claim ownership:</Text>
-                  <OrderedList
-                    stylePosition="outside"
-                    marginStart={6}
-                    spacing={2}
-                  >
-                    <ListItem>
-                      <Stack>
-                        <Text>Save File</Text>
-                        <Button
-                          whiteSpace="nowrap"
-                          variant="orange"
-                          size={["sm", null, "md"]}
-                          w="fit-content"
-                          disabled={nameData.state === "loading"}
-                          onClick={handleDownload}
-                        >
-                          Download your face
-                        </Button>
-                      </Stack>
-                    </ListItem>
-                    <ListItem>
-                      <Stack>
-                        <Text>Inscribe</Text>
-                        <Text>
-                          Go to{" "}
-                          <ChakraLink isExternal href="https://ordinalsbot.com">
-                            ordinalsbot.com
-                          </ChakraLink>
-                          , upload your face and inscribe!
-                        </Text>
-                      </Stack>
-                    </ListItem>
-                  </OrderedList>
-                </Stack>
-              </Alert>
+              <Button
+                whiteSpace="nowrap"
+                variant="orange"
+                size={["md", null, "lg"]}
+                w="fit-content"
+                disabled={nameData.state === "loading"}
+                alignSelf="center"
+                as={ChakraLink}
+                href={GAMMA_CREATE_URL(name)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Inscribe your face
+              </Button>
             </Stack>
           </ModalBody>
           <ModalFooter>

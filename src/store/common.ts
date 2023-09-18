@@ -16,7 +16,9 @@ import { atom } from "jotai";
 // STORAGE ATOMS
 /////////////////////////
 
-export const selectedNameAtom = atom("");
+export const selectedNameAtom = atom("", (get, set, update) => {
+  set(selectedNameAtom, (update as string).toLowerCase());
+});
 
 /////////////////////////
 // HELPER FUNCTIONS

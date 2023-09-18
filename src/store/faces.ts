@@ -216,12 +216,18 @@ export const FACES_COMPONENTS = [
     }),
 ];
 
-/* UNUSED FACES
-  Faces.BitcoinFace107,
-  Faces.BitcoinFace292,
-  Faces.BitcoinFace428,
-  Faces.BitcoinFace532,
-*/
+// https://gamma.io/?is_create_open=true&step=2&path=inscription&image_url=https%3A%2F%2Ffix-invalid-layer-selection.bitcoin-faces.pages.dev%2Fapi%2Fget-onchain-image%3Fname%3Dgamadsfma
+export const GAMMA_CREATE_URL = (name: string) => {
+  const url = new URL("https://gamma.io");
+  url.searchParams.set("is_create_open", "true");
+  url.searchParams.set("step", "2");
+  url.searchParams.set("path", "inscription");
+  url.searchParams.set(
+    "image_url",
+    `https://bitcoinfaces.xyz/api/get-onchain-image?name=${name}`
+  );
+  return url.toString();
+};
 
 /////////////////////////
 // TYPES
