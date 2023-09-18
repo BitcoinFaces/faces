@@ -262,23 +262,10 @@ export function listLayersFromHash(hashArray: number[], onchain = false) {
     : LOCAL_ATTRIBUTES;
 
   for (const [key, value] of Object.entries(attributes)) {
-    const index = hashArray[hashIndex % hashArray.length];
-
     // handle 'eyes' separately
     if (key === "eyes") {
       const eyeAttributes = value as EyeAttributes;
-      const eyeProb = index % 100;
-      let eyeType: EyeTypes;
-      if (eyeProb < 50) {
-        eyeType = "normal";
-      } else {
-        const laserProb = (eyeProb - 50) % 50;
-        if (laserProb < 20) {
-          eyeType = "starburst";
-        } else {
-          eyeType = "laser";
-        }
-      }
+      const eyeType = calculateEyeType(hashArray, hashIndex);
       const eyeIndex =
         hashArray[(hashIndex + 1) % hashArray.length] %
         eyeAttributes[eyeType].length;
@@ -293,6 +280,7 @@ export function listLayersFromHash(hashArray: number[], onchain = false) {
     }
     // handle required layers (other than 'eyes')
     else {
+      const index = hashArray[hashIndex % hashArray.length];
       listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
     }
 
