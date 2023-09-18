@@ -122,7 +122,7 @@ function LandingForm() {
             },
           }}
         >
-          Claim now
+          Coming soon
         </Button>
       </Stack>
       <Modal
