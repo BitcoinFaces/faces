@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import TitleBar from "../components/layout/title-bar";
-import BitcoinFacesTextLogo from "../components/layout/bitcoin-faces-text-logo";
+import { Link } from "react-router-dom";
 
 function Faq() {
   return (
@@ -28,7 +28,11 @@ function Faq() {
         justifyContent="flex-start"
         maxW={1200}
       >
-        <Image maxW={600} alignSelf="center" src="/bitcoin-faces-social.jpeg" />
+        <Box alignSelf="center">
+          <Link to="/">
+            <Image maxW={600} src="/bitcoin-faces-social.jpeg" />
+          </Link>
+        </Box>
         <Heading>FAQ</Heading>
         <Text>
           Bitcoin Faces is{" "}
@@ -49,7 +53,7 @@ function Faq() {
           <OrderedList ms={6}>
             <ListItem>
               Bitcoinfaces.xyz allows anybody to deterministically generate a
-              unique Bitcoin Face for any name.
+              unique Bitcoin Face for any name (string of text).
             </ListItem>
             <ListItem>
               Upon generation, you may choose to inscribe that face as a new
@@ -60,8 +64,8 @@ function Faq() {
               are the associated fees.
             </ListItem>
             <ListItem>
-              Every name has a unique Bitcoin Face, but can be inscribed more
-              than once.
+              Every name has a unique Bitcoin Face, but that face can be
+              inscribed more than once.
             </ListItem>
             <ListItem>
               The first person to claim each name has first ownership. First is
@@ -71,8 +75,7 @@ function Faq() {
         </Alert>
         <Text>
           The original Bitcoin Faces inscriptions found between inscription
-          #1,081–18,676 are separate from the generator on bitcoinfaces.xyz. The
-          original Ordinals are not being distributed or made available via
+          #1,081–18,676 are not being distributed or made available via
           bitcoinfaces.xyz at this time.
         </Text>
       </Stack>
