@@ -495,18 +495,27 @@ export function createLayersFromSelection(
   onchain = false,
   host = "/content"
 ) {
-  return Object.entries(layers)
-    .filter(([key, value]) => value !== undefined)
-    .map(([key, value], index) => {
+  const order: Layers[] = [
+    "background",
+    "body",
+    "head",
+    "ears",
+    "chain",
+    "mouth",
+    "nose",
+    "hat",
+    "eyes",
+  ];
+  return order
+    .map((key: Layers) => {
+      const value = layers[key];
+      if (value === undefined) return "";
       if (onchain) {
-        // return a link to the on-chain image hash
-        return `<image id="${key}-${
-          index + 1
-        }" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
+        return `<image id="${key}-1" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
       }
-      // return the matching layer in the cache
       return value;
     })
+    .filter((str) => str !== "")
     .join("\n");
 }
 
