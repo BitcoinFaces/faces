@@ -61,7 +61,7 @@ function LandingForm() {
     }
   };
 
-  const Face = FACES_COMPONENTS[25];
+  const Face = FACES_COMPONENTS[1];
 
   // AT LAUNCH:
   // change below logo: Every name has a Bitcoin Face. Claim yours first.

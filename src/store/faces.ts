@@ -14,13 +14,52 @@ import {
   OPTIONAL_LAYERS,
   OptionalLayers,
 } from "./attributes";
-import { BitcoinFace82 } from "../components/faces";
+import * as Faces from "../components/faces";
 
 /////////////////////////
 // CONSTANTS
 /////////////////////////
 
-export const FACES_COMPONENTS = [BitcoinFace82];
+export const FACES_COMPONENTS = [
+  Faces.BitcoinFace82,
+  Faces.BitcoinFace85,
+  Faces.BitcoinFace105,
+  Faces.BitcoinFace107,
+  Faces.BitcoinFace109,
+  Faces.BitcoinFace112,
+  Faces.BitcoinFace115,
+  Faces.BitcoinFace118,
+  Faces.BitcoinFace135,
+  Faces.BitcoinFace142,
+  Faces.BitcoinFace160,
+  Faces.BitcoinFace209,
+  Faces.BitcoinFace230,
+  Faces.BitcoinFace287,
+  Faces.BitcoinFace292,
+  Faces.BitcoinFace298,
+  Faces.BitcoinFace308,
+  Faces.BitcoinFace425,
+  Faces.BitcoinFace428,
+  Faces.BitcoinFace443,
+  Faces.BitcoinFace476,
+  Faces.BitcoinFace515,
+  Faces.BitcoinFace517,
+  Faces.BitcoinFace521,
+  Faces.BitcoinFace522,
+  Faces.BitcoinFace525,
+  Faces.BitcoinFace532,
+  Faces.BitcoinFace547,
+  Faces.BitcoinFace568,
+  Faces.BitcoinFace581,
+  Faces.BitcoinFace584,
+  Faces.BitcoinFace586,
+  Faces.BitcoinFace593,
+  Faces.BitcoinFace608,
+  Faces.BitcoinFace613,
+  Faces.BitcoinFace614,
+  Faces.BitcoinFace672,
+  Faces.BitcoinFace675,
+];
 
 /////////////////////////
 // TYPES
