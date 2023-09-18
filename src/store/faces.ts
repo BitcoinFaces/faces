@@ -43,7 +43,6 @@ import {
   Layers,
   OPTIONAL_LAYERS,
   OptionalLayers,
-  REQUIRED_LAYERS,
 } from "./attributes";
 
 /////////////////////////
