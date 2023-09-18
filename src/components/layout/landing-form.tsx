@@ -63,6 +63,12 @@ function LandingForm() {
 
   const Face = FACES_COMPONENTS[25];
 
+  // AT LAUNCH:
+  // change below logo: Every name has a Bitcoin Face. Claim yours first.
+  // remove isDisabled from input
+  // remove isDisabled from button
+  // remove _disabled styles from button
+
   return (
     <Stack
       spacing={4}
@@ -80,7 +86,11 @@ function LandingForm() {
         fontWeight="bold"
         fontSize={["xl", null, "3xl", "4xl"]}
       >
-        Every name has a Bitcoin Face. Claim yours first.
+        Upvote on{" "}
+        <ChakraLink isExternal href="https://ord.io" variant="orange-black">
+          Ord.io
+        </ChakraLink>{" "}
+        to launch
       </Text>
       <Stack
         direction={["column", null, "row"]}
@@ -95,6 +105,7 @@ function LandingForm() {
             fontSize="xl"
             py={6}
             onChange={(e) => setName(e.target.value)}
+            isDisabled
           />
         </FormControl>
         <Button
@@ -104,8 +115,15 @@ function LandingForm() {
           height="52px"
           width={["100%", null, "50%"]}
           onClick={handleSubmit}
+          isDisabled
+          _disabled={{
+            _hover: {
+              cursor: "not-allowed",
+              backgroundColor: "orange.300",
+            },
+          }}
         >
-          Claim now
+          Coming soon
         </Button>
       </Stack>
       <Modal

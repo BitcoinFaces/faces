@@ -4,6 +4,15 @@ import {
   LOCAL_ATTRIBUTES,
   Layers,
 } from "./attributes";
+import { delay } from "./common";
+
+describe("LOCAL_ATTRIBUTES matches INSCRIBED_ATTRIBUTES", () => {
+  it("keys are in the same order", () => {
+    const inscribedKeys = Object.keys(INSCRIBED_ATTRIBUTES);
+    const localKeys = Object.keys(LOCAL_ATTRIBUTES);
+    expect(inscribedKeys).toEqual(localKeys);
+  });
+});
 
 describe("Local attributes match on-chain attributes", () => {
   function testLayer(layer: string, inscribedArray: any) {
@@ -27,6 +36,7 @@ describe("Local attributes match on-chain attributes", () => {
               Layers,
               keyof EyeAttributes
             ];
+
             const attributeLayer =
               layerName === "eyes"
                 ? LOCAL_ATTRIBUTES[layerName][eyeType]
@@ -38,6 +48,7 @@ describe("Local attributes match on-chain attributes", () => {
               expect(cleanedSVG).toEqual(attributeLayer[eyeType][i]);
             }
           }
+          await delay(500);
         });
       }
     } else {

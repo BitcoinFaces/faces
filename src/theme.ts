@@ -29,6 +29,29 @@ const linkStyles = {
       textDecoration: "underline",
     },
   }),
+  variants: {
+    orange: {
+      color: "#FF9300",
+      _hover: {
+        textDecoration: "none",
+        color: "orange.400",
+      },
+    },
+    "orange-black": {
+      color: "#FF9300",
+      textDecoration: "underline",
+      _hover: {
+        color: "black",
+      },
+    },
+    "black-orange": {
+      color: "black",
+      _hover: {
+        textDecoration: "none",
+        color: "#FF9300",
+      },
+    },
+  },
 };
 
 // Define the base component styles
