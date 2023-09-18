@@ -15,6 +15,7 @@ import {
   OptionalLayers,
 } from "./attributes";
 import * as Faces from "../components/faces";
+import { atomFamily } from "jotai/utils";
 
 /////////////////////////
 // CONSTANTS
@@ -22,44 +23,205 @@ import * as Faces from "../components/faces";
 
 export const FACES_COMPONENTS = [
   Faces.BitcoinFace82,
-  Faces.BitcoinFace85,
-  Faces.BitcoinFace105,
-  Faces.BitcoinFace107,
-  Faces.BitcoinFace109,
-  Faces.BitcoinFace112,
-  Faces.BitcoinFace115,
   Faces.BitcoinFace118,
-  Faces.BitcoinFace135,
-  Faces.BitcoinFace142,
-  Faces.BitcoinFace160,
-  Faces.BitcoinFace209,
-  Faces.BitcoinFace230,
-  Faces.BitcoinFace287,
-  Faces.BitcoinFace292,
-  Faces.BitcoinFace298,
-  Faces.BitcoinFace308,
-  Faces.BitcoinFace425,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "image 8",
+  }),
+  Faces.BitcoinFace107,
   Faces.BitcoinFace428,
-  Faces.BitcoinFace443,
-  Faces.BitcoinFace476,
-  Faces.BitcoinFace515,
-  Faces.BitcoinFace517,
-  Faces.BitcoinFace521,
-  Faces.BitcoinFace522,
-  Faces.BitcoinFace525,
   Faces.BitcoinFace532,
-  Faces.BitcoinFace547,
+  Faces.BitcoinFace292,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "Group",
+  }),
+  Faces.BitcoinFace443,
   Faces.BitcoinFace568,
-  Faces.BitcoinFace581,
-  Faces.BitcoinFace584,
-  Faces.BitcoinFace586,
-  Faces.BitcoinFace593,
-  Faces.BitcoinFace608,
+  Faces.BitcoinFace521,
+  Faces.BitcoinFace142,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "image 7",
+  }),
   Faces.BitcoinFace613,
-  Faces.BitcoinFace614,
-  Faces.BitcoinFace672,
+  Faces.BitcoinFace581,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "image 1",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "image 27",
+  }),
   Faces.BitcoinFace675,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "bitcoin-face-85",
+  }),
+  Faces.BitcoinFace517,
+  Faces.BitcoinFace522,
+  Faces.BitcoinFace287,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "Group",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "Group",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "11",
+  }),
+  Faces.BitcoinFace308,
+  Faces.BitcoinFace298,
+  Faces.BitcoinFace135,
+  Faces.BitcoinFace515,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "30",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "13",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "16",
+  }),
+  Faces.BitcoinFace425,
+  Faces.BitcoinFace584,
+  Faces.BitcoinFace608,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "26",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "14",
+  }),
+  Faces.BitcoinFace586,
+  Faces.BitcoinFace109,
+  Faces.BitcoinFace230,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "22",
+  }),
+  Faces.BitcoinFace672,
+  Faces.BitcoinFace525,
+  Faces.BitcoinFace547,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "2",
+  }),
+  Faces.BitcoinFace112,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "24",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "4",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "23",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "group-1",
+  }),
+  Faces.BitcoinFace209,
+  Faces.BitcoinFace476,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "21",
+  }),
+  Faces.BitcoinFace160,
+  Faces.BitcoinFace614,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "group-2",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "25",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "6",
+  }),
+  Faces.BitcoinFace593,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "31",
+  }),
+  Faces.BitcoinFace115,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "29",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "5",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "19",
+  }),
+  Faces.BitcoinFace105,
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "18",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "group-3",
+  }),
+  Faces.BitcoinFaceGenerator({
+    width: "100%",
+    height: "100%",
+    name: "9",
+  }),
 ];
+
+/* UNUSED FACES
+  Faces.BitcoinFace107,
+  Faces.BitcoinFace292,
+  Faces.BitcoinFace428,
+  Faces.BitcoinFace532,
+*/
 
 /////////////////////////
 // TYPES
@@ -78,7 +240,7 @@ export interface NameData {
   svgCode: NameDataCode<string>;
 }
 
-interface NameDataCode<T> {
+export interface NameDataCode<T> {
   local: T;
   onchain: T;
 }
@@ -124,6 +286,39 @@ export const nameDataAtom = atom(async (get): Promise<NameData | undefined> => {
     svgCode,
   };
 });
+
+export const nameDataAtomFamily = atomFamily((inputName: string) =>
+  atom(async (): Promise<NameData | undefined> => {
+    const name = inputName;
+    const hashArray = await createHashArray(name);
+    const layersSelection: NameDataCode<LayerSelection> = {
+      local: selectLayersFromHash(hashArray, false),
+      onchain: selectLayersFromHash(hashArray, true),
+    };
+    const layersSelectionList = listLayersFromHash(hashArray);
+    const layersCode: NameDataCode<LayerCode> = {
+      local: getLayersFromSelection(layersSelection.local, false),
+      onchain: getLayersFromSelection(layersSelection.onchain, true),
+    };
+    const svgCodeLayers: NameDataCode<string> = {
+      local: createLayersFromSelection(layersSelection.local, false),
+      onchain: createLayersFromSelection(layersSelection.onchain, true),
+    };
+    const svgCode: NameDataCode<string> = {
+      local: createSvgFileFromLayers(name, svgCodeLayers.local),
+      onchain: createSvgFileFromLayers(name, svgCodeLayers.onchain),
+    };
+    return {
+      name,
+      hashArray,
+      layersSelection,
+      layersSelectionList,
+      layersCode,
+      svgCodeLayers,
+      svgCode,
+    };
+  })
+);
 
 /////////////////////////
 // HELPER FUNCTIONS

@@ -25,7 +25,9 @@ describe("Faces components", () => {
     expect(actualExports.sort()).toEqual(expectedExports.sort());
 
     // Validate FACES_COMPONENTS against exports
-    const actualComponents = FACES_COMPONENTS.map((c) => c.name);
+    const actualComponents = FACES_COMPONENTS.map((c) =>
+      typeof c === "function" ? c.name : null
+    ).filter(Boolean);
     expect(actualComponents.sort()).toEqual(actualExports.sort());
   });
 });

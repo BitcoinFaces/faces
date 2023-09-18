@@ -1,3 +1,4 @@
+export { default as BitcoinFaceGenerator } from "./bitcoin-face-generator";
 export { default as BitcoinFace82 } from "./bitcoin-face-82";
 export { default as BitcoinFace85 } from "./bitcoin-face-85";
 export { default as BitcoinFace105 } from "./bitcoin-face-105";

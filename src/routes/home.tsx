@@ -15,14 +15,16 @@ function Home() {
       elements.push(
         <Box
           key={`box-${i}`}
-          width={size.toString()}
-          height={size.toString()}
           borderRadius="lg"
-          style={{
-            overflow: "hidden",
-          }}
+          alignSelf="center"
+          boxSize={size}
+          m="auto"
         >
-          <Face width={size.toString()} height={size.toString()} />
+          {typeof Face === "function" ? (
+            <Face width={size.toString()} height={size.toString()} />
+          ) : (
+            Face
+          )}
         </Box>
       );
     }

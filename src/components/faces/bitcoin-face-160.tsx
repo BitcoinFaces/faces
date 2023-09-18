@@ -6,6 +6,8 @@ const BitcoinFace160 = (props: BitcoinFaceLogoProps) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     fill="none"
     viewBox="0 0 147 147"
+    width={props.width}
+    height={props.height}
   >
     <g clipPath="url(#prefix__a)">
       <path fill="#FC532D" d="M147 0H0v147h147V0Z" />
