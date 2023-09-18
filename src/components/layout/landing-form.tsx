@@ -87,7 +87,11 @@ function LandingForm() {
         fontSize={["xl", null, "3xl", "4xl"]}
       >
         Upvote on{" "}
-        <ChakraLink isExternal href="https://ord.io" variant="orange-black">
+        <ChakraLink
+          isExternal
+          href="https://www.ord.io/33094029"
+          variant="orange-black"
+        >
           Ord.io
         </ChakraLink>{" "}
         to launch
