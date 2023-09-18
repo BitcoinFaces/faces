@@ -4,6 +4,7 @@ import {
   LOCAL_ATTRIBUTES,
   Layers,
 } from "./attributes";
+import { delay } from "./common";
 
 describe("LOCAL_ATTRIBUTES matches INSCRIBED_ATTRIBUTES", () => {
   it("keys are in the same order", () => {
@@ -47,6 +48,7 @@ describe("Local attributes match on-chain attributes", () => {
               expect(cleanedSVG).toEqual(attributeLayer[eyeType][i]);
             }
           }
+          await delay(500);
         });
       }
     } else {
