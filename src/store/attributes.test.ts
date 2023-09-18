@@ -35,6 +35,7 @@ describe("Local attributes match on-chain attributes", () => {
               Layers,
               keyof EyeAttributes
             ];
+
             const attributeLayer =
               layerName === "eyes"
                 ? LOCAL_ATTRIBUTES[layerName][eyeType]
