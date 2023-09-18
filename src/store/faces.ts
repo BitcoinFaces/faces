@@ -356,6 +356,5 @@ export function createSvgFileFromLayers(
   width = "100%",
   height = "100%"
 ) {
-  // TODO: add flag for laser eyes, add defs
-  return `<svg id="Bitcoin Face for ${name}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
+  return `<svg id="bitcoin-face-for-${name}" width="${width}" height="${height}" viewBox="0 0 1025 1025" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n${svgLayers}\n</svg>`;
 }
