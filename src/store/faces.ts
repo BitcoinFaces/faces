@@ -180,7 +180,7 @@ function handleOptionalLayer(
   value: any,
   hashArray: number[],
   hashIndex: number
-): string | undefined {
+): { id: string; svg: string } | undefined {
   const randomValue = hashArray[hashIndex % hashArray.length] % 100;
   const chance = {
     chain: CHANCE_CHAIN,
@@ -191,7 +191,10 @@ function handleOptionalLayer(
 
   if (chance && randomValue < chance) {
     const layerIndex = calculateLayerIndex(hashArray, hashIndex, value.length);
-    return `${key}-${layerIndex + 1}`;
+    return {
+      id: `${key}-${layerIndex + 1}`,
+      svg: value[layerIndex],
+    };
   }
 
   return undefined;
@@ -234,7 +237,7 @@ export function selectLayersFromHash(hashArray: number[], onchain = false) {
     else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
       const layer = handleOptionalLayer(key, value, hashArray, hashIndex);
       if (layer) {
-        selectedLayers[key as Layers] = layer;
+        selectedLayers[key as Layers] = layer.svg;
       }
     }
     // handle required layers (other than 'eyes')
@@ -259,23 +262,10 @@ export function listLayersFromHash(hashArray: number[], onchain = false) {
     : LOCAL_ATTRIBUTES;
 
   for (const [key, value] of Object.entries(attributes)) {
-    const index = hashArray[hashIndex % hashArray.length];
-
     // handle 'eyes' separately
     if (key === "eyes") {
       const eyeAttributes = value as EyeAttributes;
-      const eyeProb = index % 100;
-      let eyeType: EyeTypes;
-      if (eyeProb < 50) {
-        eyeType = "normal";
-      } else {
-        const laserProb = (eyeProb - 50) % 50;
-        if (laserProb < 20) {
-          eyeType = "starburst";
-        } else {
-          eyeType = "laser";
-        }
-      }
+      const eyeType = calculateEyeType(hashArray, hashIndex);
       const eyeIndex =
         hashArray[(hashIndex + 1) % hashArray.length] %
         eyeAttributes[eyeType].length;
@@ -283,19 +273,14 @@ export function listLayersFromHash(hashArray: number[], onchain = false) {
     }
     // handle optional layers
     else if (OPTIONAL_LAYERS.includes(key as OptionalLayers)) {
-      const randomValue = index % 100; // based on index
-      if (
-        (key === "chain" && randomValue < CHANCE_CHAIN) ||
-        (key === "earring" && randomValue < CHANCE_EARRING) ||
-        (key === "glasses" && randomValue < CHANCE_GLASSES) ||
-        (key === "hat" && randomValue < CHANCE_HAT)
-      ) {
-        const layerIndex = index % (value as string[]).length;
-        listedLayers.push(`${key}-${layerIndex + 1}`);
+      const layer = handleOptionalLayer(key, value, hashArray, hashIndex);
+      if (layer) {
+        listedLayers.push(layer.id);
       }
     }
     // handle required layers (other than 'eyes')
     else {
+      const index = hashArray[hashIndex % hashArray.length];
       listedLayers.push(`${key}-${(index % (value as string[]).length) + 1}`);
     }
 
