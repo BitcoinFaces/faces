@@ -10,7 +10,7 @@ export async function onRequest(
 ): Promise<Response> {
   try {
     const { searchParams } = new URL(context.request.url);
-    const name = searchParams.get("name")?.toLowerCase();
+    const name = searchParams.get("name");
     const layerName = searchParams.get("layerName")?.toLowerCase();
     const onchain = searchParams.get("onchain") === "true";
     const host = searchParams.get("host")
@@ -20,12 +20,13 @@ export async function onRequest(
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
     }
+    const normalizedName = decodeURIComponent(name).toLowerCase();
     // validate layerName is provided
     if (!layerName) {
       return new Response("Missing layerName parameter", { status: 400 });
     }
     // create a hash array from the input string
-    const hashArray = await createHashArray(name);
+    const hashArray = await createHashArray(normalizedName);
     // determine layer selections
     const selectedLayers = selectLayersFromHash(hashArray, onchain);
     // create svg layers from selected layers
