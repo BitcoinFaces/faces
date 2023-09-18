@@ -6,13 +6,14 @@ export async function onRequest(
 ): Promise<Response> {
   try {
     const { searchParams } = new URL(context.request.url);
-    const name = searchParams.get("name")?.toLowerCase();
+    const name = searchParams.get("name");
     // validate name is provided
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
     }
+    const normalizedName = decodeURIComponent(name).toLowerCase();
     // create a hash array from the input string
-    const hashArray = await createHashArray(name);
+    const hashArray = await createHashArray(normalizedName);
     // return hash array
     return new Response(hashArray.join(","), { status: 200 });
   } catch (err) {
