@@ -52,12 +52,12 @@ export const FACES_COMPONENTS = [
   (props: BitcoinFaceLogoProps) =>
     Faces.BitcoinFaceGenerator({
       ...props,
-      name: "Bitcoin-Faces-Random-4",
+      name: "Bitcoin-Faces-Random-40515",
     }),
   (props: BitcoinFaceLogoProps) =>
     Faces.BitcoinFaceGenerator({
       ...props,
-      name: "Bitcoin-Faces-Random-555",
+      name: "Bitcoin-Faces-Random-555-400-23-test",
     }),
   (props: BitcoinFaceLogoProps) => Faces.BitcoinFace675({ ...props }),
   (props: BitcoinFaceLogoProps) =>
@@ -71,7 +71,7 @@ export const FACES_COMPONENTS = [
   (props: BitcoinFaceLogoProps) =>
     Faces.BitcoinFaceGenerator({
       ...props,
-      name: "Bitcoin-Faces-Random-7",
+      name: "Bitcoin-Faces-Random-70",
     }),
   (props: BitcoinFaceLogoProps) =>
     Faces.BitcoinFaceGenerator({
@@ -81,7 +81,7 @@ export const FACES_COMPONENTS = [
   (props: BitcoinFaceLogoProps) =>
     Faces.BitcoinFaceGenerator({
       ...props,
-      name: "Bitcoin-Faces-Random-9000",
+      name: "Bitcoin-Faces-Random-the-best-one",
     }),
   (props: BitcoinFaceLogoProps) => Faces.BitcoinFace308({ ...props }),
   (props: BitcoinFaceLogoProps) => Faces.BitcoinFace298({ ...props }),
