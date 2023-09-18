@@ -1,33 +1,3 @@
-import BitcoinFace1 from "../components/faces/bitcoin-face-1";
-import BitcoinFace2 from "../components/faces/bitcoin-face-2";
-import BitcoinFace3 from "../components/faces/bitcoin-face-3";
-import BitcoinFace4 from "../components/faces/bitcoin-face-4";
-import BitcoinFace5 from "../components/faces/bitcoin-face-5";
-import BitcoinFace6 from "../components/faces/bitcoin-face-6";
-import BitcoinFace7 from "../components/faces/bitcoin-face-7";
-import BitcoinFace8 from "../components/faces/bitcoin-face-8";
-import BitcoinFace9 from "../components/faces/bitcoin-face-9";
-import BitcoinFace10 from "../components/faces/bitcoin-face-10";
-import BitcoinFace11 from "../components/faces/bitcoin-face-11";
-import BitcoinFace12 from "../components/faces/bitcoin-face-12";
-import BitcoinFace13 from "../components/faces/bitcoin-face-13";
-import BitcoinFace14 from "../components/faces/bitcoin-face-14";
-import BitcoinFace15 from "../components/faces/bitcoin-face-15";
-import BitcoinFace16 from "../components/faces/bitcoin-face-16";
-import BitcoinFace17 from "../components/faces/bitcoin-face-17";
-import BitcoinFace18 from "../components/faces/bitcoin-face-18";
-import BitcoinFace19 from "../components/faces/bitcoin-face-19";
-import BitcoinFace20 from "../components/faces/bitcoin-face-20";
-import BitcoinFace21 from "../components/faces/bitcoin-face-21";
-import BitcoinFace22 from "../components/faces/bitcoin-face-22";
-import BitcoinFace23 from "../components/faces/bitcoin-face-23";
-import BitcoinFace24 from "../components/faces/bitcoin-face-24";
-import BitcoinFace25 from "../components/faces/bitcoin-face-25";
-import BitcoinFace26 from "../components/faces/bitcoin-face-26";
-import BitcoinFace27 from "../components/faces/bitcoin-face-27";
-import BitcoinFace28 from "../components/faces/bitcoin-face-28";
-import BitcoinFace29 from "../components/faces/bitcoin-face-29";
-import BitcoinFace30 from "../components/faces/bitcoin-face-30";
 import { createHashArray, selectedNameAtom } from "./common";
 import { atom } from "jotai";
 import {
@@ -44,43 +14,13 @@ import {
   OPTIONAL_LAYERS,
   OptionalLayers,
 } from "./attributes";
+import { BitcoinFace82 } from "../components/faces";
 
 /////////////////////////
 // CONSTANTS
 /////////////////////////
 
-export const FACES_COMPONENTS = [
-  BitcoinFace1,
-  BitcoinFace2,
-  BitcoinFace3,
-  BitcoinFace4,
-  BitcoinFace5,
-  BitcoinFace6,
-  BitcoinFace7,
-  BitcoinFace8,
-  BitcoinFace9,
-  BitcoinFace10,
-  BitcoinFace11,
-  BitcoinFace12,
-  BitcoinFace13,
-  BitcoinFace14,
-  BitcoinFace15,
-  BitcoinFace16,
-  BitcoinFace17,
-  BitcoinFace18,
-  BitcoinFace19,
-  BitcoinFace20,
-  BitcoinFace21,
-  BitcoinFace22,
-  BitcoinFace23,
-  BitcoinFace24,
-  BitcoinFace25,
-  BitcoinFace26,
-  BitcoinFace27,
-  BitcoinFace28,
-  BitcoinFace29,
-  BitcoinFace30,
-];
+export const FACES_COMPONENTS = [BitcoinFace82];
 
 /////////////////////////
 // TYPES
