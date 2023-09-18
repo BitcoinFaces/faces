@@ -1,33 +1,3 @@
-import BitcoinFace1 from "../components/faces/bitcoin-face-1";
-import BitcoinFace2 from "../components/faces/bitcoin-face-2";
-import BitcoinFace3 from "../components/faces/bitcoin-face-3";
-import BitcoinFace4 from "../components/faces/bitcoin-face-4";
-import BitcoinFace5 from "../components/faces/bitcoin-face-5";
-import BitcoinFace6 from "../components/faces/bitcoin-face-6";
-import BitcoinFace7 from "../components/faces/bitcoin-face-7";
-import BitcoinFace8 from "../components/faces/bitcoin-face-8";
-import BitcoinFace9 from "../components/faces/bitcoin-face-9";
-import BitcoinFace10 from "../components/faces/bitcoin-face-10";
-import BitcoinFace11 from "../components/faces/bitcoin-face-11";
-import BitcoinFace12 from "../components/faces/bitcoin-face-12";
-import BitcoinFace13 from "../components/faces/bitcoin-face-13";
-import BitcoinFace14 from "../components/faces/bitcoin-face-14";
-import BitcoinFace15 from "../components/faces/bitcoin-face-15";
-import BitcoinFace16 from "../components/faces/bitcoin-face-16";
-import BitcoinFace17 from "../components/faces/bitcoin-face-17";
-import BitcoinFace18 from "../components/faces/bitcoin-face-18";
-import BitcoinFace19 from "../components/faces/bitcoin-face-19";
-import BitcoinFace20 from "../components/faces/bitcoin-face-20";
-import BitcoinFace21 from "../components/faces/bitcoin-face-21";
-import BitcoinFace22 from "../components/faces/bitcoin-face-22";
-import BitcoinFace23 from "../components/faces/bitcoin-face-23";
-import BitcoinFace24 from "../components/faces/bitcoin-face-24";
-import BitcoinFace25 from "../components/faces/bitcoin-face-25";
-import BitcoinFace26 from "../components/faces/bitcoin-face-26";
-import BitcoinFace27 from "../components/faces/bitcoin-face-27";
-import BitcoinFace28 from "../components/faces/bitcoin-face-28";
-import BitcoinFace29 from "../components/faces/bitcoin-face-29";
-import BitcoinFace30 from "../components/faces/bitcoin-face-30";
 import { createHashArray, selectedNameAtom } from "./common";
 import { atom } from "jotai";
 import {
@@ -44,43 +14,214 @@ import {
   OPTIONAL_LAYERS,
   OptionalLayers,
 } from "./attributes";
+import * as Faces from "../components/faces";
+import { atomFamily } from "jotai/utils";
 
 /////////////////////////
 // CONSTANTS
 /////////////////////////
 
 export const FACES_COMPONENTS = [
-  BitcoinFace1,
-  BitcoinFace2,
-  BitcoinFace3,
-  BitcoinFace4,
-  BitcoinFace5,
-  BitcoinFace6,
-  BitcoinFace7,
-  BitcoinFace8,
-  BitcoinFace9,
-  BitcoinFace10,
-  BitcoinFace11,
-  BitcoinFace12,
-  BitcoinFace13,
-  BitcoinFace14,
-  BitcoinFace15,
-  BitcoinFace16,
-  BitcoinFace17,
-  BitcoinFace18,
-  BitcoinFace19,
-  BitcoinFace20,
-  BitcoinFace21,
-  BitcoinFace22,
-  BitcoinFace23,
-  BitcoinFace24,
-  BitcoinFace25,
-  BitcoinFace26,
-  BitcoinFace27,
-  BitcoinFace28,
-  BitcoinFace29,
-  BitcoinFace30,
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace82({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace118({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-123",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace107({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace428({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace532({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace292({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-2049-2",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace443({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace568({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace521({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace142({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-3",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace613({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace581({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-40515",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-555-400-23-test",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace675({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-666",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace517({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace522({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace287({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-70",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-8000",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-the-best-one",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace308({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace298({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace135({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace515({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-10",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-112",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Forever-12",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace425({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace584({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace608({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-135",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-14",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace586({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace109({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace230({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-151",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace672({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace525({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace547({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-16",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace112({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-150",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-17-2",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-1800",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-19",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace209({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace476({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-20",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace160({ ...props }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace614({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-21",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-22-by-22",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-23",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace593({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-24",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace115({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-25",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-26",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-27",
+    }),
+  (props: BitcoinFaceLogoProps) => Faces.BitcoinFace105({ ...props }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-wtfbbq",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-290",
+    }),
+  (props: BitcoinFaceLogoProps) =>
+    Faces.BitcoinFaceGenerator({
+      ...props,
+      name: "Bitcoin-Faces-Random-300",
+    }),
 ];
+
+/* UNUSED FACES
+  Faces.BitcoinFace107,
+  Faces.BitcoinFace292,
+  Faces.BitcoinFace428,
+  Faces.BitcoinFace532,
+*/
 
 /////////////////////////
 // TYPES
@@ -99,7 +240,7 @@ export interface NameData {
   svgCode: NameDataCode<string>;
 }
 
-interface NameDataCode<T> {
+export interface NameDataCode<T> {
   local: T;
   onchain: T;
 }
@@ -108,6 +249,8 @@ export type BitcoinFaceLogoProps = {
   width: string;
   height: string;
 };
+
+export type BitcoinFaceGeneratorProps = BitcoinFaceLogoProps & { name: string };
 
 /////////////////////////
 // DERIVED ATOMS
@@ -145,6 +288,39 @@ export const nameDataAtom = atom(async (get): Promise<NameData | undefined> => {
     svgCode,
   };
 });
+
+export const nameDataAtomFamily = atomFamily((inputName: string) =>
+  atom(async (): Promise<NameData | undefined> => {
+    const name = inputName;
+    const hashArray = await createHashArray(name);
+    const layersSelection: NameDataCode<LayerSelection> = {
+      local: selectLayersFromHash(hashArray, false),
+      onchain: selectLayersFromHash(hashArray, true),
+    };
+    const layersSelectionList = listLayersFromHash(hashArray);
+    const layersCode: NameDataCode<LayerCode> = {
+      local: getLayersFromSelection(layersSelection.local, false),
+      onchain: getLayersFromSelection(layersSelection.onchain, true),
+    };
+    const svgCodeLayers: NameDataCode<string> = {
+      local: createLayersFromSelection(layersSelection.local, false),
+      onchain: createLayersFromSelection(layersSelection.onchain, true),
+    };
+    const svgCode: NameDataCode<string> = {
+      local: createSvgFileFromLayers(name, svgCodeLayers.local),
+      onchain: createSvgFileFromLayers(name, svgCodeLayers.onchain),
+    };
+    return {
+      name,
+      hashArray,
+      layersSelection,
+      layersSelectionList,
+      layersCode,
+      svgCodeLayers,
+      svgCode,
+    };
+  })
+);
 
 /////////////////////////
 // HELPER FUNCTIONS
@@ -319,18 +495,27 @@ export function createLayersFromSelection(
   onchain = false,
   host = "/content"
 ) {
-  return Object.entries(layers)
-    .filter(([key, value]) => value !== undefined)
-    .map(([key, value], index) => {
+  const order: Layers[] = [
+    "background",
+    "body",
+    "head",
+    "ears",
+    "chain",
+    "mouth",
+    "nose",
+    "hat",
+    "eyes",
+  ];
+  return order
+    .map((key: Layers) => {
+      const value = layers[key];
+      if (value === undefined) return "";
       if (onchain) {
-        // return a link to the on-chain image hash
-        return `<image id="${key}-${
-          index + 1
-        }" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
+        return `<image id="${key}-1" xlink:href="${host}/${value}" x="0" y="0" width="100%" height="100%"></image>`;
       }
-      // return the matching layer in the cache
       return value;
     })
+    .filter((str) => str !== "")
     .join("\n");
 }
 

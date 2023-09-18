@@ -8,25 +8,20 @@ function Home() {
   const size = useBreakpointValue({ base: 75, md: 100, lg: 125 }) ?? 75;
   const columns = useBreakpointValue({ base: 4, md: 6, lg: 8 }) ?? 4;
 
+  const allPossibleFaces = FACES_COMPONENTS.map((Face, i) => (
+    <Box
+      key={`box-${i}`}
+      borderRadius="lg"
+      alignSelf="center"
+      boxSize={size}
+      m="auto"
+    >
+      {Face({ width: size.toString(), height: size.toString() })}
+    </Box>
+  ));
+
   const fillGrid = () => {
-    const elements = [];
-    for (let i = 0; i < numImages; i++) {
-      const Face = FACES_COMPONENTS[i % FACES_COMPONENTS.length];
-      elements.push(
-        <Box
-          key={`box-${i}`}
-          width={size.toString()}
-          height={size.toString()}
-          borderRadius="lg"
-          style={{
-            overflow: "hidden",
-          }}
-        >
-          <Face width={size.toString()} height={size.toString()} />
-        </Box>
-      );
-    }
-    return elements;
+    return allPossibleFaces.slice(0, numImages);
   };
 
   return (

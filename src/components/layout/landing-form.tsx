@@ -28,7 +28,7 @@ import { loadable } from "jotai/utils";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
-import { FACES_COMPONENTS, nameDataAtom } from "../../store/faces";
+import { nameDataAtom } from "../../store/faces";
 import { FaCode, FaDownload } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -60,8 +60,6 @@ function LandingForm() {
       document.body.removeChild(downloadLink);
     }
   };
-
-  const Face = FACES_COMPONENTS[25];
 
   // AT LAUNCH:
   // change below logo: Every name has a Bitcoin Face. Claim yours first.
@@ -156,7 +154,7 @@ function LandingForm() {
                     boxSize={[200, null, 300]}
                     m="auto"
                   >
-                    {nameData.state === "hasData" && nameData.data ? (
+                    {nameData.state === "hasData" && nameData.data && (
                       <Box
                         h="100%"
                         w="100%"
@@ -164,8 +162,6 @@ function LandingForm() {
                           __html: nameData.data.svgCode.local,
                         }}
                       />
-                    ) : (
-                      <Face width="100%" height="100%" />
                     )}
                   </Box>
                 </Skeleton>
