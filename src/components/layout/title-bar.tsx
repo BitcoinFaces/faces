@@ -1,5 +1,5 @@
 import { ButtonGroup, IconButton, Stack } from "@chakra-ui/react";
-import { FaBook } from "react-icons/fa";
+import { FaBook, FaQuestionCircle } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 function TitleBar(props: { align: "flex-start" | "center" | "flex-end" }) {
@@ -13,6 +13,16 @@ function TitleBar(props: { align: "flex-start" | "center" | "flex-end" }) {
       py={2}
     >
       <ButtonGroup>
+        <IconButton
+          aria-label="FAQ"
+          title="FAQ"
+          variant="ghost"
+          icon={<FaQuestionCircle />}
+          as="a"
+          href="https://bitcoinfaces.xyz/faq"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
         <IconButton
           aria-label="API Documentation"
           title="API Documentation"
