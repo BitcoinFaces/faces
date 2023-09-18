@@ -39,7 +39,7 @@ function LandingForm() {
   // form submission handler
   const handleSubmit = () => {
     if (!name) return;
-    setName(name);
+    setName(name.toLowerCase());
     onOpen();
   };
 
