@@ -19,7 +19,7 @@ export async function onRequest(
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
     }
-    const normalizedName = decodeURIComponent(name).toLowerCase();
+    const normalizedName = decodeURIComponent(name).toLowerCase().trim();
     // create a hash array from the input string
     const hashArray = await createHashArray(normalizedName);
     // determine layer selections

@@ -20,7 +20,7 @@ export async function onRequest(
     if (!name) {
       return new Response("Missing name parameter", { status: 400 });
     }
-    const normalizedName = decodeURIComponent(name).toLowerCase();
+    const normalizedName = decodeURIComponent(name).toLowerCase().trim();
     // validate layerName is provided
     if (!layerName) {
       return new Response("Missing layerName parameter", { status: 400 });
