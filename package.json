@@ -1,5 +1,6 @@
 {
   "name": "bitcoin-faces",
+  "description": "Every name has a bitcoin face. Get yours first.",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
