@@ -72,7 +72,11 @@ function LandingForm() {
       <Box w="90%">
         <BitcoinFacesTextLogo />
       </Box>
-      <Text fontWeight="bold" fontSize={["xl", null, "3xl", "4xl"]}>
+      <Text
+        textAlign="center"
+        fontWeight="bold"
+        fontSize={["xl", null, "3xl", "4xl"]}
+      >
         Every name has a Bitcoin Face. Claim yours first.
       </Text>
       <Stack
@@ -146,11 +150,56 @@ function LandingForm() {
                 alignItems="center"
                 justifyContent="space-evenly"
               >
-                <Stack direction="column">
+                <Stack direction="column" w={[185, null, "auto"]}>
+                  <Text fontWeight="bold" fontSize="lg" textAlign="left">
+                    Inscribe:
+                  </Text>
+                  <Stack
+                    direction={["column", null, "row"]}
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={2}
+                  >
+                    <Button
+                      whiteSpace="nowrap"
+                      isDisabled={nameData.state === "loading"}
+                      size={["md", null, "lg"]}
+                      w={[185, null, "auto"]}
+                      variant="orange"
+                      as={ChakraLink}
+                      href={ORDINALSBOT_CREATE_URL(name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      OrdinalsBot
+                    </Button>
+                    <Button
+                      whiteSpace="nowrap"
+                      isDisabled={nameData.state === "loading"}
+                      size={["md", null, "lg"]}
+                      w={[185, null, "auto"]}
+                      variant="orange"
+                      as={ChakraLink}
+                      href={GAMMA_CREATE_URL(name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Gamma
+                    </Button>
+                  </Stack>
+                </Stack>
+                <Stack direction="column" w={[185, null, "auto"]}>
                   <Text fontWeight="bold" fontSize="lg" textAlign="left">
                     Share:
                   </Text>
-                  <Stack direction="row" alignItems="center" spacing={2}>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={2}
+                  >
                     <IconButton
                       aria-label="Download Bitcoin Face"
                       title="Download Bitcoin Face"
@@ -181,39 +230,6 @@ function LandingForm() {
                       target="_blank"
                       rel="noopener noreferrer"
                     />
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <Text fontWeight="bold" fontSize="lg" textAlign="left">
-                    Inscribe:
-                  </Text>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <Button
-                      whiteSpace="nowrap"
-                      isDisabled={nameData.state === "loading"}
-                      size={["md", null, "lg"]}
-                      variant="orange"
-                      as={ChakraLink}
-                      href={ORDINALSBOT_CREATE_URL(name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
-                    >
-                      OrdinalsBot
-                    </Button>
-                    <Button
-                      whiteSpace="nowrap"
-                      isDisabled={nameData.state === "loading"}
-                      size={["md", null, "lg"]}
-                      variant="orange"
-                      as={ChakraLink}
-                      href={GAMMA_CREATE_URL(name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Gamma
-                    </Button>
                   </Stack>
                 </Stack>
               </Stack>
