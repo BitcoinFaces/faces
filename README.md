@@ -1,6 +1,8 @@
 # Bitcoin Faces
 
-Putting faces to names.
+Every name has a bitcoin face. Get yours first.
+
+FAQ: https://bitcoinfaces.xyz/faq
 
 ## Development
 
@@ -9,18 +11,28 @@ This repository uses React + Vite with:
 - [Chakra UI](https://chakra-ui.com/) for components
 - [Jotai](https://jotai.org/) for state management
 
-To run the front-end locally:
+### Front-end
 
-```
+```bash
 npm install
 npm start
 ```
 
-To run the API locally:
+### API
 
-```
+```bash
 npm run build
-npx wrangler pages dev /build --compatibility-date 2023-09-04
+npx wrangler pages dev ./build --compatibility-date 2023-09-04
 ```
+
+API docs: https://bitcoinfaces.xyz/api-docs
+
+### Testing
+
+```bash
+npm test
+```
+
+### Deployment
 
 Deployed via Cloudflare Pages.
