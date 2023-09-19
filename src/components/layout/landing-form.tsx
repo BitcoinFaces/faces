@@ -11,14 +11,11 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  ModalFooter,
   Stack,
   Text,
   useDisclosure,
   Skeleton,
-  ButtonGroup,
   IconButton,
-  Spacer,
 } from "@chakra-ui/react";
 
 import { useAtom, useAtomValue } from "jotai";
@@ -75,11 +72,7 @@ function LandingForm() {
       <Box w="90%">
         <BitcoinFacesTextLogo />
       </Box>
-      <Text
-        textAlign="center"
-        fontWeight="bold"
-        fontSize={["xl", null, "3xl", "4xl"]}
-      >
+      <Text fontWeight="bold" fontSize={["xl", null, "3xl", "4xl"]}>
         Every name has a Bitcoin Face. Claim yours first.
       </Text>
       <Stack
@@ -120,48 +113,56 @@ function LandingForm() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>
-            <Heading size="xl">Congrats, a new face!</Heading>
+          <ModalHeader mt={4}>
+            <Heading textAlign="center" size="xl">
+              Congrats, a new face!
+            </Heading>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Stack direction="column" spacing={4}>
-              <Stack direction="row" alignSelf="center" alignItems="center">
-                <Stack flex="1" alignItems="center">
-                  <Skeleton isLoaded={nameData.state !== "loading"}>
-                    <Box borderRadius="lg" boxSize={[200, null, 300]} m="auto">
-                      {nameData.state === "hasData" && nameData.data && (
-                        <Box
-                          h="100%"
-                          w="100%"
-                          dangerouslySetInnerHTML={{
-                            __html: nameData.data.svgCode.local,
-                          }}
-                        />
-                      )}
-                    </Box>
-                  </Skeleton>
-                </Stack>
-                <Spacer />
-                <Stack flex="1" alignItems="center">
-                  <ButtonGroup
-                    size="lg"
-                    flexDir="column"
-                    alignItems="center"
-                    spacing={0}
-                    ml="auto"
-                  >
+          <ModalBody textAlign="center">
+            <Stack spacing={4} mb={8}>
+              <Text fontSize="md">
+                The first person to inscribe each face claims ownership. First
+                is first.
+              </Text>
+              <Skeleton isLoaded={nameData.state !== "loading"}>
+                <Box borderRadius="lg" boxSize={[200, null, 300]} m="auto">
+                  {nameData.state === "hasData" && nameData.data && (
+                    <Box
+                      h="100%"
+                      w="100%"
+                      dangerouslySetInnerHTML={{
+                        __html: nameData.data.svgCode.local,
+                      }}
+                    />
+                  )}
+                </Box>
+              </Skeleton>
+              <Text fontWeight="bold" fontSize="3xl" mb={4}>
+                {name}
+              </Text>
+              <Stack
+                direction={["column", null, "row"]}
+                alignItems="center"
+                justifyContent="space-evenly"
+              >
+                <Stack direction="column">
+                  <Text fontWeight="bold" fontSize="lg" textAlign="left">
+                    Share:
+                  </Text>
+                  <Stack direction="row" alignItems="center" spacing={2}>
                     <IconButton
                       aria-label="Download Bitcoin Face"
                       title="Download Bitcoin Face"
+                      size="lg"
                       icon={<FaDownload />}
                       disabled={nameData.state === "loading"}
                       onClick={handleDownload}
                     />
                     <IconButton
-                      mt={2}
                       aria-label="Copy Source Code"
                       title="Copy Source Code"
+                      size="lg"
                       icon={<FaCode />}
                       disabled={nameData.state === "loading"}
                       onClick={() => {
@@ -171,65 +172,53 @@ function LandingForm() {
                       }}
                     />
                     <IconButton
-                      mt={2}
                       aria-label="Share on X (Twitter)"
                       title="Share on X (Twitter)"
+                      size="lg"
                       icon={<FaXTwitter />}
                       as="a"
                       href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
                       target="_blank"
                       rel="noopener noreferrer"
                     />
-                  </ButtonGroup>
+                  </Stack>
+                </Stack>
+                <Stack direction="column">
+                  <Text fontWeight="bold" fontSize="lg" textAlign="left">
+                    Inscribe:
+                  </Text>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <Button
+                      whiteSpace="nowrap"
+                      isDisabled={nameData.state === "loading"}
+                      size={["md", null, "lg"]}
+                      variant="orange"
+                      as={ChakraLink}
+                      href={ORDINALSBOT_CREATE_URL(name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      OrdinalsBot
+                    </Button>
+                    <Button
+                      whiteSpace="nowrap"
+                      isDisabled={nameData.state === "loading"}
+                      size={["md", null, "lg"]}
+                      variant="orange"
+                      as={ChakraLink}
+                      href={GAMMA_CREATE_URL(name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Gamma
+                    </Button>
+                  </Stack>
                 </Stack>
               </Stack>
-              <Stack>
-                <Text fontWeight="bold" fontSize="2xl" textAlign="center">
-                  {name}
-                </Text>
-                <Text>
-                  The first person to inscribe each face claims ownership. First
-                  is first.
-                </Text>
-              </Stack>
-              <Text fontWeight="bold" fontSize="xl">
-                Inscribe with:
-              </Text>
-              <ButtonGroup
-                size={["md", null, "lg"]}
-                variant="orange"
-                alignSelf="center"
-              >
-                <Button
-                  whiteSpace="nowrap"
-                  isDisabled={nameData.state === "loading"}
-                  as={ChakraLink}
-                  href={ORDINALSBOT_CREATE_URL(name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none" }}
-                >
-                  OrdinalsBot
-                </Button>
-                <Button
-                  whiteSpace="nowrap"
-                  isDisabled={nameData.state === "loading"}
-                  as={ChakraLink}
-                  href={GAMMA_CREATE_URL(name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none" }}
-                >
-                  Gamma
-                </Button>
-              </ButtonGroup>
             </Stack>
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose} borderRadius="lg">
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Stack>
