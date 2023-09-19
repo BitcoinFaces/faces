@@ -25,6 +25,11 @@ describe("Local attributes match on-chain attributes", () => {
             const response = await fetch(
               `https://inscribe.news/api/content/${hash}`
             );
+            if (!response.ok) {
+              // back off and try again
+              await delay(2000);
+              return await fetch(`https://inscribe.news/api/content/${hash}`);
+            }
             const data = await response.text();
             const cleanedSVG = data
               .replace(/>\s+/g, ">")
