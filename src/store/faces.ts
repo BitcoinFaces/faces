@@ -229,6 +229,13 @@ export const GAMMA_CREATE_URL = (name: string) => {
   return url.toString();
 };
 
+// https://ordinalsbot.com/bitcoin-faces?text=satoshi
+export const ORDINALSBOT_CREATE_URL = (name: string) => {
+  const url = new URL("https://ordinalsbot.com/bitcoin-faces");
+  url.searchParams.set("text", name);
+  return url.toString();
+};
+
 /////////////////////////
 // TYPES
 /////////////////////////
