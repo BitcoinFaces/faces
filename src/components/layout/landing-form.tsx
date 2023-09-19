@@ -18,6 +18,7 @@ import {
   Skeleton,
   ButtonGroup,
   IconButton,
+  Spacer,
 } from "@chakra-ui/react";
 
 import { useAtom, useAtomValue } from "jotai";
@@ -120,66 +121,71 @@ function LandingForm() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading>Claim your Bitcoin Face.</Heading>
+            <Heading size="xl">Congrats, a new face!</Heading>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack direction="column" spacing={4}>
-              <Stack>
-                <Skeleton isLoaded={nameData.state !== "loading"}>
-                  <Box
-                    borderRadius="lg"
-                    alignSelf="center"
-                    boxSize={[200, null, 300]}
-                    m="auto"
+              <Stack direction="row" alignSelf="center" alignItems="center">
+                <Stack flex="1" alignItems="center">
+                  <Skeleton isLoaded={nameData.state !== "loading"}>
+                    <Box borderRadius="lg" boxSize={[200, null, 300]} m="auto">
+                      {nameData.state === "hasData" && nameData.data && (
+                        <Box
+                          h="100%"
+                          w="100%"
+                          dangerouslySetInnerHTML={{
+                            __html: nameData.data.svgCode.local,
+                          }}
+                        />
+                      )}
+                    </Box>
+                  </Skeleton>
+                </Stack>
+                <Spacer />
+                <Stack flex="1" alignItems="center">
+                  <ButtonGroup
+                    size="lg"
+                    flexDir="column"
+                    alignItems="center"
+                    spacing={0}
+                    ml="auto"
                   >
-                    {nameData.state === "hasData" && nameData.data && (
-                      <Box
-                        h="100%"
-                        w="100%"
-                        dangerouslySetInnerHTML={{
-                          __html: nameData.data.svgCode.local,
-                        }}
-                      />
-                    )}
-                  </Box>
-                </Skeleton>
-                <ButtonGroup alignSelf="center" size="lg">
-                  <IconButton
-                    aria-label="Download Bitcoin Face"
-                    title="Download Bitcoin Face"
-                    icon={<FaDownload />}
-                    disabled={nameData.state === "loading"}
-                    onClick={handleDownload}
-                  />
-                  <IconButton
-                    aria-label="Copy Source Code"
-                    title="Copy Source Code"
-                    icon={<FaCode />}
-                    disabled={nameData.state === "loading"}
-                    onClick={() => {
-                      if (nameData.state === "hasData" && nameData.data) {
-                        copyText(nameData.data.svgCode.onchain);
-                      }
-                    }}
-                  />
-                  <IconButton
-                    aria-label="Share on X (Twitter)"
-                    title="Share on X (Twitter)"
-                    icon={<FaXTwitter />}
-                    as="a"
-                    href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                </ButtonGroup>
+                    <IconButton
+                      aria-label="Download Bitcoin Face"
+                      title="Download Bitcoin Face"
+                      icon={<FaDownload />}
+                      disabled={nameData.state === "loading"}
+                      onClick={handleDownload}
+                    />
+                    <IconButton
+                      mt={2}
+                      aria-label="Copy Source Code"
+                      title="Copy Source Code"
+                      icon={<FaCode />}
+                      disabled={nameData.state === "loading"}
+                      onClick={() => {
+                        if (nameData.state === "hasData" && nameData.data) {
+                          copyText(nameData.data.svgCode.onchain);
+                        }
+                      }}
+                    />
+                    <IconButton
+                      mt={2}
+                      aria-label="Share on X (Twitter)"
+                      title="Share on X (Twitter)"
+                      icon={<FaXTwitter />}
+                      as="a"
+                      href={`https://twitter.com/intent/tweet?text=${name}%20%2B%20%40bitcoinfaces%20%3D%20%F0%9F%91%B9%0A%0A&url=https%3A%2F%2Fbitcoinfaces.xyz`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  </ButtonGroup>
+                </Stack>
               </Stack>
               <Stack>
-                <Text>
-                  Congrats! You've generated the Bitcoin Face for{" "}
-                  <Box as="span" fontWeight="bold">
-                    {name}
-                  </Box>
+                <Text fontWeight="bold" fontSize="2xl" textAlign="center">
+                  {name}
                 </Text>
                 <Text>
                   The first person to inscribe each face claims ownership. First
