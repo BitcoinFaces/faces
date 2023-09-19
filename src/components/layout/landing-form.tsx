@@ -25,7 +25,7 @@ import { loadable } from "jotai/utils";
 import BitcoinFacesTextLogo from "./bitcoin-faces-text-logo";
 import { selectedNameAtom } from "../../store/common";
 import { useClipboardToast } from "../../hooks/use-clipboard-toast";
-import { GAMMA_CREATE_URL, nameDataAtom } from "../../store/faces";
+import {GAMMA_CREATE_URL, nameDataAtom, ORDINALSBOT_CREATE_URL} from "../../store/faces";
 import { FaCode, FaDownload } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -190,11 +190,26 @@ function LandingForm() {
                 disabled={nameData.state === "loading"}
                 alignSelf="center"
                 as={ChakraLink}
-                href={GAMMA_CREATE_URL(name)}
+                href={ORDINALSBOT_CREATE_URL(name)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Inscribe your face
+                Inscribe via OrdinalsBot
+              </Button>
+
+              <Button
+                  whiteSpace="nowrap"
+                  variant="orange"
+                  size={["md", null, "lg"]}
+                  w="fit-content"
+                  disabled={nameData.state === "loading"}
+                  alignSelf="center"
+                  as={ChakraLink}
+                  href={GAMMA_CREATE_URL(name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+              >
+                Inscribe via Gamma
               </Button>
             </Stack>
           </ModalBody>
