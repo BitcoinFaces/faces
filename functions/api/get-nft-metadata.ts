@@ -29,9 +29,9 @@ export async function onRequest(
       if (typeof nameValue !== "string" || nameValue.length === 0) {
         return new Response("Invalid hashedName parameter", { status: 400 });
       }
-      computedName = nameValue.toLowerCase().trim();
+      computedName = nameValue;
     } else {
-      computedName = decodeURIComponent(name!).toLowerCase().trim();
+      computedName = decodeURIComponent(name!);
       if (computedName.length === 0) {
         return new Response("Invalid name parameter", { status: 400 });
       }
@@ -49,16 +49,23 @@ export async function onRequest(
     // create attributes array from selected layers
     const attributes = Object.entries(listedLayers)
       .filter(([, value]) => value !== undefined) // filter out undefined values
-      .map(([key, value]) => ({
-        trait_type: key,
-        value: value as string,
-      }));
+      .map(([key, value]) => {
+        const [traitType, number] = value.split(/-(?=\d+$)/); // split on last hyphen
+        return {
+          trait_type: traitType,
+          value: parseInt(number),
+        };
+      });
 
     const metadata = {
       sip: 16,
-      name: computedName,
+      name: `Bitcoin Face for ${computedName}`,
       description:
-        "Every name has a face! Get yours at https://bitcoinfaces.xyz",
+        "Every name has a Bitcoin Face! Get yours at https://bitcoinfaces.xyz",
+      size: 792907, // TODO: triple-check this, +1 for contract itself id 0 variant
+      price: 0,
+      external_url: "https://x.com/BitcoinFaces",
+      asset_type: "image/svg+xml",
       image: `https://bitcoinfaces.xyz/api/get-image?name=${encodeURIComponent(
         computedName
       )}`,
@@ -66,9 +73,7 @@ export async function onRequest(
       properties: {
         category: "image",
         collection: "Bitcoin Faces",
-        collection_image: `https://bitcoinfaces.xyz/api/get-image?name=${encodeURIComponent(
-          computedName
-        )}`,
+        collection_image: `https://bitcoinfaces.xyz/bitcoin-faces-social.jpeg`,
       },
     };
 
