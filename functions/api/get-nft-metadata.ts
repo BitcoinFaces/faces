@@ -1,10 +1,7 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { cvToValue, hexToCV } from "@stacks/transactions";
 import { createHashArray } from "../../src/store/common";
-import {
-  listLayersFromHash,
-  selectLayersFromHash,
-} from "../../src/store/faces";
+import { listLayersFromHash } from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -16,7 +13,7 @@ export async function onRequest(
     const onchain = searchParams.get("onchain") === "true";
     // validate name is provided
     if (!name && !hashedName) {
-      return new Response("Missing name  or hashedName parameter", {
+      return new Response("Missing name or hashedName parameter", {
         status: 400,
       });
     } else if (name && hashedName) {
@@ -24,18 +21,30 @@ export async function onRequest(
         status: 400,
       });
     }
-    // compute normalized name from either case
-    // where name has to exist in 2nd case
-    const normalizedName = hashedName
-      ? cvToValue(hexToCV(hashedName), true).toLowerCase().trim()
-      : decodeURIComponent(name!).toLowerCase().trim();
+    // compute name from either case
+    let computedName: string;
+    if (hashedName) {
+      const nameCV = hexToCV(hashedName);
+      const nameValue = cvToValue(nameCV, true);
+      if (typeof nameValue !== "string" || nameValue.length === 0) {
+        return new Response("Invalid hashedName parameter", { status: 400 });
+      }
+      computedName = nameValue.toLowerCase().trim();
+    } else {
+      computedName = decodeURIComponent(name!).toLowerCase().trim();
+      if (computedName.length === 0) {
+        return new Response("Invalid name parameter", { status: 400 });
+      }
+    }
+
+    // normalize name
+    const normalizedName = computedName.toLowerCase().trim();
 
     // create a hash array from the input string
     const hashArray = await createHashArray(normalizedName);
 
     // determine layer selections
     const listedLayers = listLayersFromHash(hashArray, onchain);
-    // const selectedLayers = selectLayersFromHash(hashArray, onchain);
 
     // create attributes array from selected layers
     const attributes = Object.entries(listedLayers)
@@ -47,18 +56,18 @@ export async function onRequest(
 
     const metadata = {
       sip: 16,
-      name: normalizedName,
+      name: computedName,
       description:
         "Every name has a face! Get yours at https://bitcoinfaces.xyz",
       image: `https://bitcoinfaces.xyz/api/get-image?name=${encodeURIComponent(
-        normalizedName
+        computedName
       )}`,
       attributes: attributes,
       properties: {
         category: "image",
         collection: "Bitcoin Faces",
         collection_image: `https://bitcoinfaces.xyz/api/get-image?name=${encodeURIComponent(
-          normalizedName
+          computedName
         )}`,
       },
     };
