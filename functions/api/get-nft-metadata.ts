@@ -1,7 +1,10 @@
 import { EventContext } from "@cloudflare/workers-types";
 import { cvToValue, hexToCV } from "@stacks/transactions";
 import { createHashArray } from "../../src/store/common";
-import { selectLayersFromHash } from "../../src/store/faces";
+import {
+  listLayersFromHash,
+  selectLayersFromHash,
+} from "../../src/store/faces";
 
 export async function onRequest(
   context: EventContext<any, any, any>
@@ -31,10 +34,11 @@ export async function onRequest(
     const hashArray = await createHashArray(normalizedName);
 
     // determine layer selections
-    const selectedLayers = selectLayersFromHash(hashArray, onchain);
+    const listedLayers = listLayersFromHash(hashArray, onchain);
+    // const selectedLayers = selectLayersFromHash(hashArray, onchain);
 
     // create attributes array from selected layers
-    const attributes = Object.entries(selectedLayers)
+    const attributes = Object.entries(listedLayers)
       .filter(([, value]) => value !== undefined) // filter out undefined values
       .map(([key, value]) => ({
         trait_type: key,
